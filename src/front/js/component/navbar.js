@@ -25,32 +25,12 @@ export const Navbar = () => {
 						</li>
 						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.clients}>
 							<Link to="/clients" className="nav-link text-decoration-none">
-								<span className="nav-span">Clients</span>
+								<span className="nav-span">Books</span>
 							</Link>
 						</li>
 						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.jobs_admin}>
 							<Link to="/jobs/admi" className="nav-link text-decoration-none">
-								<span className="nav-span">Jobs</span>
-							</Link>
-						</li>
-						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.jobs_technical}>
-							<Link to="/jobs/technical" className="nav-link text-decoration-none" >
-								<span className="nav-span">My Jobs</span>
-							</Link>
-						</li>
-						<li className="nav-link nav-item nav-menu ms-3">
-							<Link to="/ourServices" className="nav-link text-decoration-none">
-								<span className="nav-span">Services</span>
-							</Link>
-						</li>
-						<li className="nav-link nav-item nav-menu ms-3">
-							<Link to="/aboutus" className="nav-link text-decoration-none">
-								<span className="nav-span">About</span>
-							</Link>
-						</li>
-						<li className="nav-link nav-item nav-menu ms-3">
-							<Link to="/contactUs" className="nav-link text-decoration-none">
-								<span className="nav-span">Contact</span>
+								<span className="nav-span">Favorites</span>
 							</Link>
 						</li>
 						<li className="nav-item ms-3 me-2 mt-2" hidden={store.buttons_admin_tech.login}>
