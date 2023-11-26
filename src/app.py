@@ -185,10 +185,6 @@ def getUserById(user_id):
             "username": user.username,
             "first_name": user.first_name,
             "last_name": user.last_name,
-            "phone": user.phone,
-            "role": user.role.name,
-            "question_security": user.question_security.name,
-            "answer_security": user.answer_security,
         },
     }
 
@@ -209,10 +205,6 @@ def getUserByUsername(user_username):
             "username": user.username,
             "first_name": user.first_name,
             "last_name": user.last_name,
-            "phone": user.phone,
-            "role": user.role.name,
-            "question_security": user.question_security.name,
-            "answer_security": user.answer_security,
         },
     }
 
@@ -245,21 +237,8 @@ def addUser():
     if "last_name" not in request_body or request_body["last_name"] == "":
         raise APIException("The last name is required", status_code=404)
 
-    if "phone" not in request_body or request_body["phone"] == "":
-        raise APIException("The phone is required", status_code=404)
-
     if "password" not in request_body or request_body["password"] == "":
         raise APIException("The password is required", status_code=404)
-
-    if "role" not in request_body or request_body["role"] == "":
-        raise APIException("The role is required", status_code=404)
-
-    if "question_security" not in request_body:
-        raise APIException(
-            "The question security is required", status_code=404)
-
-    if "answer_security" not in request_body:
-        raise APIException("The answer security is required", status_code=404)
 
     username_exist = User.query.filter_by(
         username=request_body['username']).first()
@@ -276,9 +255,6 @@ def addUser():
         last_name=request_body['last_name'],
         phone=request_body['phone'],
         password=pw_hash,
-        role=request_body['role'],
-        question_security=request_body['question_security'],
-        answer_security=request_body['answer_security']
     )
     user.save()
 
@@ -309,12 +285,6 @@ def updateUser(user_id):
     if "last_name" in request_body:
         user.last_name = request_body['last_name']
 
-    if "role" in request_body:
-        user.role = request_body['role']
-
-    if "phone" in request_body:
-        user.phone = request_body['phone']
-
     if "password" in request_body:
         pw_hash = bcrypt.generate_password_hash(
             request_body['password']).decode("utf-8")
@@ -338,27 +308,6 @@ def deleteUser(user_id):
     
     user = User.query.get(user_id)
     admin = User.query.filter_by(role = "admin").first()
-    job_by_status_finish = Job.query.filter_by(id_technical = user_id, status="finish")
-    job_by_status_cancel = Job.query.filter_by(id_technical = user_id, status="cancel")
-    
-    for job_finish in job_by_status_finish:
-        job_finish.id_technical = admin.id
-        job_finish.update()
-        
-    for job_cancel in job_by_status_cancel:
-        job_cancel.id_technical = admin.id
-        job_cancel.update()
-        
-    
-    job = Job.query.filter_by(id_technical = user_id).first()
-    if job is not None:
-        raise APIException(f"The tecinical has jobs asigned, please reassign jobs before proceeding", status_code=400)
-
-    if user_current is None:
-        raise APIException("User not found", status_code=404)
-    
-    if user_current.role.value != "admin":
-        raise APIException("Access denied", status_code=403)
 
     user.delete()
 
@@ -372,37 +321,37 @@ def deleteUser(user_id):
 # <----------------- Book ----------------------->
 
 
-@app.route('/client', methods=['GET'])
+@app.route('/books', methods=['GET'])
 @jwt_required()
 def getClients():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
 
     if user is None:
-        raise APIException("Clients not found", status_code=404)
+        raise APIException("Book not found", status_code=404)
     
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)
 
-    clients = Client.query.all()
+    book = Book.query.all()
     
-    if clients is None:
-        raise APIException("Clients not found", status_code=404)
+    if book is None:
+        raise APIException("Book not found", status_code=404)
     
-    clients = list(map(lambda client: client.serialize(), clients))
-    sorted_clients = sorted(clients, key=lambda client: client['id'])
+    books = list(map(lambda book: book.serialize(), clients))
+    sorted_books = sorted(books, key=lambda book: book['id'])
 
     response_body = {
         "msg": "ok",
-        "clients": sorted_clients
+        "books": sorted_books
     }
 
     return jsonify(response_body), 200
 
 
-@app.route('/client/<int:client_id>', methods=['GET'])
+@app.route('/book/<int:book_id>', methods=['GET'])
 @jwt_required()
-def getClient(client_id):
+def getBook(book_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
 
@@ -412,7 +361,7 @@ def getClient(client_id):
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)    
     
-    client = Client.query.get(client_id)
+    client = Client.query.get(client_id)**
 
     if client is None:
         raise APIException("Client not found", status_code=404)
@@ -423,14 +372,13 @@ def getClient(client_id):
             "id": client.id,
             "first_name": client.first_name,
             "last_name": client.last_name,
-            "phone": client.phone,
         },
     }
 
     return jsonify(response_body), 200
 
 
-@app.route('/client', methods=['POST'])
+@app.route('/book', methods=['POST'])
 @jwt_required()
 def addClient():
     current_user = get_jwt_identity()
@@ -444,45 +392,38 @@ def addClient():
     
     request_body = request.get_json(force=True, silent=True)
 
-    if request_body is None:
-        raise APIException("You must send information", 400)
-
     if "first_name" not in request_body or request_body["first_name"] == "":
         raise APIException("The first name is required", status_code=404)
 
     if "last_name" not in request_body or request_body["last_name"] == "":
         raise APIException("The last name is required")
-
-    if "phone" not in request_body or request_body["phone"] == "":
-        raise APIException("The phone is required")
     
-    client_exist = Client.query.filter_by(
+    book_exist = Book.query.filter_by(
         first_name=request_body['first_name'], 
         last_name=request_body['last_name'], 
-        phone=request_body['phone']).first()
+        
 
-    if client_exist:
-        raise APIException("The client already exist", status_code=400)
+    if book_exist:
+        raise APIException("The book already exist", status_code=400)
 
-    client = Client(
+    book = Book(
         first_name=request_body['first_name'],
         last_name=request_body['last_name'],
-        phone=request_body['phone'],
     )
 
-    client.save()
+    book.save()
 
     response_body = {
         "msg": "ok",
-        "client": client.serialize()
+        "book": book.serialize()
     }
 
     return jsonify(response_body), 200
 
 
-@app.route('/client/<int:client_id>', methods=['PUT'])
+@app.route('/book/<int:book_id>', methods=['PUT'])
 @jwt_required()
-def updateClient(client_id):
+def updateBook(book_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
 
@@ -493,36 +434,34 @@ def updateClient(client_id):
         raise APIException("Access denied", status_code=403)
     
     request_body = request.get_json(force=True, silent=True)
-    client = Client.query.get(client_id)
+    book = Book.query.get(client_id)
 
-    if client is None:
+    if book is None:
         raise APIException("Client not found", status_code=404)
 
     if request_body is None:
         raise APIException("You must send information", status_code=400)
 
     if "first_name" in request_body:
-        client.first_name = request_body['first_name']
+        book.first_name = request_body['first_name']
 
     if "last_name" in request_body:
-        client.last_name = request_body['last_name']
+        book.last_name = request_body['last_name']
 
-    if "phone" in request_body:
-        client.phone = request_body['phone']
 
-    client.update()
+    book.update()
 
     response_body = {
         "msg": "ok",
-        "client": client.serialize()
+        "book": book.serialize()
     }
 
     return jsonify(response_body), 200
 
 
-@app.route('/client/<int:client_id>', methods=['DELETE'])
+@app.route('/book/<int:book_id>', methods=['DELETE'])
 @jwt_required()
-def deleteClient(client_id):
+def deleteBook(book_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
     
@@ -532,16 +471,16 @@ def deleteClient(client_id):
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)
     
-    client = Client.query.get(client_id)
+    book = Book.query.get(client_id)
 
-    if client is None:
+    if book is None:
         raise APIException("Client not found", status_code=400)
 
-    client.delete()
+    book.delete()
 
     response_body = {
         "msg": "ok",
-        "client": client.serialize()
+        "book": book.serialize()
     }
 
     return jsonify(response_body), 200
@@ -549,7 +488,7 @@ def deleteClient(client_id):
 # <----------------- Favorites ----------------------->
 
 
-@app.route('/job', methods=['GET'])
+@app.route('/favorites', methods=['GET'])
 @jwt_required()
 def getJobs():
     current_user = get_jwt_identity()
@@ -561,39 +500,39 @@ def getJobs():
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)
     
-    job = Job.query.all()
+    favorites = Favorites.query.all()
 
-    if job is None:
-        raise APIException("Jobs not found")
+    if favorites is None:
+        raise APIException("Favorites not found")
 
-    jobs = list(map(lambda job: job.serialize(), job))
+    favorites_s = list(map(lambda favorites: favorites.serialize(), favorites))
 
-    sorted_jobs = sorted(jobs, key=lambda job: job['id'])
+    sorted_favorites_s = sorted(favorites_s, key=lambda favorites: favorites['id'])
     
     response_body = {
         "msg": "ok",
-        "Jobs": sorted_jobs
+        "favorites_s": sorted_favorites_s
     }
     return jsonify(response_body), 200
 
 
-@app.route('/job/<int:job_id>', methods=['GET'])
+@app.route('/favorites/<int:favorites_id>', methods=['GET'])
 @jwt_required()
-def getJobById(job_id):
+def getFavoritesById(favorites_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
     
     if user is None:
         raise APIException("User not found", status_code=404)
     
-    job = Job.query.get(job_id)
+    favorites = Favorites.query.get(favorites_id)
 
-    if job is None:
-        raise APIException("Job not found", status_code=404)
+    if favorites is None:
+        raise APIException("Favorites not found", status_code=404)
 
     response_body = {
             "msg": "ok",
-            "Job": {
+            "favorites": {
                 "id": job.id,
                 "code": job.code,
                 "type": job.type.name,
@@ -610,35 +549,7 @@ def getJobById(job_id):
         }
     return jsonify(response_body), 200
 
-
-@app.route('/job/technical/<int:technical_id>', methods=['GET'])
-@jwt_required()
-def getJobsByTechnical(technical_id):
-    current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
-
-    if user is None:
-        raise APIException("User not found", status_code=404)
-    
-    if user.role.value != "technical":
-        raise APIException("Access denied", status_code=403)
-    
-    job = Job.query.filter_by(id_technical=technical_id)
-    jobs = list(map(lambda job: job.serialize(), job))
-    
-
-    if job is None:
-        raise APIException("Jobs not found", status_code=404)
-
-    sorted_jobs = sorted(jobs, key=lambda job: job['id'])
-    response_body = {
-        "msg": "ok",
-        "Jobs": sorted_jobs
-    }
-    return jsonify(response_body), 200
-
-
-@app.route('/job/client/<int:client_id>', methods=['GET'])
+@app.route('/favorites/book/<int:book_id>', methods=['GET'])
 @jwt_required()
 def getJobsByClient(client_id):
     current_user = get_jwt_identity()
