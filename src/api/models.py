@@ -13,6 +13,7 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(250), nullable=False)
 
     def __repr__(self):
@@ -24,6 +25,7 @@ class User(db.Model):
             "username": self.username,
             "first_name": self.first_name,
             "last_name": self.last_name,
+            "email": self.email,
             # do not serialize the password, its a security breach
         }
 
@@ -49,7 +51,7 @@ class Book (db.Model):
     category = db.Column(db.String(80), nullable=False)
 
     def __repr__(self):
-        return f'<Book {self.first_name + " " + self.last_name}>'
+        return f'<Book {self.name}>'
 
     def serialize(self):
         return {
@@ -73,14 +75,32 @@ class Book (db.Model):
         db.session.commit()
 
 
-class Category (enum.Enum):
-     biographies = "Biographies"
-     horror = "Horror"
-     recreational = "Recreational"
-     poetic= "Poetic"
-     youth = "Youth"
-     fiction = "Fiction"
-     comedy = "Comedy"
+class Category (db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    id_book = db.Column(db.Integer, db.ForeignKey(Book.id))
+    book = db.relationship(Book)
+    def __repr__(self):
+        return f'<Category {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "id_book": self.id_book
+        }
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
 
 
 class Favorites(db.Model):
@@ -91,7 +111,7 @@ class Favorites(db.Model):
     user = db.relationship(User)
 
     def __repr__(self):
-        return f'<Favorites {self.code}>'
+        return f'<Favorites {self.id}>'
 
     def serialize(self):
         return {
