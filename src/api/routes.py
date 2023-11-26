@@ -19,12 +19,4 @@ def handle_hello():
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
     }
 
-    return jsonify(response_body), 200
-@api.route('/book', methods=['GET']) 
-def book():
-
-    books = Book.query.all()
-    books_name = list(map(
-        lambda book:book.serialize(),books
-    ))
-    return jsonify(books_name)
+    
