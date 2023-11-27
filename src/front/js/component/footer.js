@@ -1,6 +1,6 @@
 import React, { Component, useContext } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../img/Logo.jpg"
+import logo from "../../img/logo.png"
 import { Context } from "../store/appContext";
 
 export const Footer = () => {
@@ -23,16 +23,41 @@ export const Footer = () => {
 				</div>
 
 				<div className="col">
-					<Link to="/books" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.clients}>
+					<Link to="/clients" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.clients}>
 						<span className="footer-span">Clients</span>
 					</Link>
 				</div>
 
 				<div className="col">
-					<Link to="/favorites_s/admi" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.jobs_admin}>
+					<Link to="/jobs/admi" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.jobs_admin}>
 						<span className="footer-span">Jobs</span>
 					</Link>
 				</div>
+				
+				<div className="col">
+					<Link to="/jobs/technical" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.jobs_technical}>
+						<span className="footer-span">My Jobs</span>
+					</Link>
+				</div>
+
+				<div className="col">
+					<Link to="/ourServices" className="link-footer text-decoration-none">
+						<span className="footer-span">Services</span>
+					</Link>
+				</div>
+
+				<div className="col">
+					<Link to="/aboutus" className="link-footer text-decoration-none">
+						<span className="footer-span">About</span>
+					</Link>
+				</div>
+
+				<div className="col mb-5">
+					<Link to="/contactUs" className="link-footer text-decoration-none">
+						<span className="footer-span">Contact</span>
+					</Link>
+				</div>
+				
 			</div>
 			<div className="col-md-12 col-lg-2 col-sm-12 text-center m-auto">
 				<div className="col">
@@ -42,6 +67,22 @@ export const Footer = () => {
 				</div>
 				<div className="col my-2 ">
 					<span className="mb-0 fs-5">Join our community</span>
+				</div>
+
+				<div className="col icons">
+					<a className="icon" href="https://facebook.com">
+						<span className="tooltip">Facebook</span>
+						<i className="fa-brands fa-facebook ms-2 fs-5"></i>
+					</a>
+					<a className="icon" href="https://instagram.com">
+						<i className="fa-brands fa-instagram ms-2 fs-5"></i>
+					</a>
+					<a className="icon" href="https://twitter.com">
+						<i className="fa-brands fa-twitter ms-2 fs-5"></i>
+					</a>
+					<a className="icon" href="https://youtube.com">
+						<i className="fa-brands fa-youtube ms-2 fs-5"></i>
+					</a>
 				</div>
 			</div>
 			<hr className="mt-2 hr-footer"></hr>
