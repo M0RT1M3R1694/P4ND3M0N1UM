@@ -6,19 +6,13 @@ import { Home } from "./pages/home";
 import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Clients } from "./pages/clients";
+import { Books } from "./pages/books";
 import Login from "./pages/login";
 import ForgotPass from "./pages/fotgotPass";
-import AboutUs from "./pages/aboutUs";
-import OurServices from "./pages/ourServices";
-import ChangePass from "./pages/changePass";
 import { Users } from "./pages/users";
-import { ContactUs } from "./pages/contactUs";
-import { JobsAdmi } from "./pages/jobsAdmi";
-import { JobsTechnical } from "./pages/jobsTechnical";
+import { Favorites_sAdmi } from "./pages/favorites_sAdmi";
 import BackToTopBtn from "./component/backToTopBtn";
 import PrivateRoutes from "./utils/privateRoutes"
-import { AboutProject } from "./pages/aboutProject";
 
 
 
@@ -32,8 +26,8 @@ const Layout = () => {
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
-    const {store, actions} = useContext(Context)
-    
+    const { store, actions } = useContext(Context)
+
     return (
         <div>
             <BrowserRouter basename={basename}>
@@ -47,20 +41,20 @@ const Layout = () => {
                         <Route element={<AboutUs />} path="/aboutus" />
                         <Route element={<OurServices />} path="/ourServices" />
                         <Route element={<ContactUs />} path="/contactUs" />
-                        <Route element={<AboutProject/>} path="/aboutproject"/>
-                        <Route element={<PrivateRoutes role={"admin"}/>}>
+                        <Route element={<AboutProject />} path="/aboutproject" />
+                        <Route element={<PrivateRoutes role={"admin"} />}>
                             <Route element={<JobsAdmi />} path="/jobs/admi" />
                             <Route element={<Clients />} path="/clients" />
                             <Route element={<Users />} path="/users" />
-                        </Route>    
-                        <Route element={<PrivateRoutes role={"technical"}/>}>
+                        </Route>
+                        <Route element={<PrivateRoutes role={"technical"} />}>
                             <Route element={<JobsTechnical />} path="jobs/technical" />
-                        </Route>                   
+                        </Route>
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
-                <BackToTopBtn/>
+                <BackToTopBtn />
             </BrowserRouter>
         </div>
     );
