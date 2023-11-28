@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
-from api.models import db, User, Client, Job
+from api.models import db, User,Book,Favorites,Category
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -37,7 +37,7 @@ app.url_map.strict_slashes = False
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWS_SECRET")
 jwt = JWTManager(app)
 
-# database condiguration
+# database configuration
 db_url = os.getenv("DATABASE_URL")
 if db_url is not None:
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url.replace(
@@ -49,7 +49,7 @@ else:
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'dev.solutions.team23@gmail.com'
+app.config['MAIL_USERNAME'] = 'dev.solutions.@gmail.com'
 app.config['MAIL_PASSWORD'] = 'jfihzvwnbjmzgnkt'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
@@ -323,7 +323,7 @@ def deleteUser(user_id):
 
 @app.route('/books', methods=['GET'])
 @jwt_required()
-def getClients():
+def getBooks():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
 
@@ -338,7 +338,7 @@ def getClients():
     if book is None:
         raise APIException("Book not found", status_code=404)
     
-    books = list(map(lambda book: book.serialize(), clients))
+    books = list(map(lambda book: book.serialize(), books))
     sorted_books = sorted(books, key=lambda book: book['id'])
 
     response_body = {
@@ -361,17 +361,20 @@ def getBook(book_id):
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)    
     
-    client = Client.query.get(client_id)**
+    book = Book.query.get(book_id)
 
-    if client is None:
-        raise APIException("Client not found", status_code=404)
+    if book is None:
+        raise APIException("Book not found", status_code=404)
 
     response_body = {
         "msg": "ok",
-        "Client": {
-            "id": client.id,
-            "first_name": client.first_name,
-            "last_name": client.last_name,
+        "Book": {
+            "id": book.id,
+            "name": book.name,
+            "description": book.description,
+            "year": book.year,
+            "author": book.author,
+            "category": book.category,
         },
     }
 
@@ -380,7 +383,7 @@ def getBook(book_id):
 
 @app.route('/book', methods=['POST'])
 @jwt_required()
-def addClient():
+def addBook():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
 
@@ -402,13 +405,13 @@ def addClient():
         first_name=request_body['first_name'], 
         last_name=request_body['last_name'], 
         
-
+    )
     if book_exist:
         raise APIException("The book already exist", status_code=400)
 
     book = Book(
-        first_name=request_body['first_name'],
-        last_name=request_body['last_name'],
+        description=request_body['description'],
+        author=request_body['author'],
     )
 
     book.save()
@@ -434,19 +437,19 @@ def updateBook(book_id):
         raise APIException("Access denied", status_code=403)
     
     request_body = request.get_json(force=True, silent=True)
-    book = Book.query.get(client_id)
+    book = Book.query.get(book_id)
 
     if book is None:
-        raise APIException("Client not found", status_code=404)
+        raise APIException("Book not found", status_code=404)
 
     if request_body is None:
         raise APIException("You must send information", status_code=400)
 
-    if "first_name" in request_body:
-        book.first_name = request_body['first_name']
+    if "description" in request_body:
+        book.description = request_body['description']
 
-    if "last_name" in request_body:
-        book.last_name = request_body['last_name']
+    if "author" in request_body:
+        book.author = request_body['author']
 
 
     book.update()
@@ -471,10 +474,10 @@ def deleteBook(book_id):
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)
     
-    book = Book.query.get(client_id)
+    book = Book.query.get(book_id)
 
     if book is None:
-        raise APIException("Client not found", status_code=400)
+        raise APIException("Book not found", status_code=400)
 
     book.delete()
 
@@ -490,7 +493,7 @@ def deleteBook(book_id):
 
 @app.route('/favorites', methods=['GET'])
 @jwt_required()
-def getJobs():
+def getFavorites():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
     
@@ -533,40 +536,30 @@ def getFavoritesById(favorites_id):
     response_body = {
             "msg": "ok",
             "favorites": {
-                "id": job.id,
-                "code": job.code,
-                "type": job.type.name,
-                "brand": job.brand,
-                "model": job.model,
-                "serial_number": job.serial_number,
-                "status": job.status.name,
-                "issues": job.issues,
-                "comments": job.comments,
-                "time_stamp": job.time_stamp,
-                "technical": job.technical.serialize(),
-                "client": job.client.serialize()
+                "id": favorites.id,
+                "book": favorites.book,
             }
         }
     return jsonify(response_body), 200
 
 @app.route('/favorites/book/<int:book_id>', methods=['GET'])
 @jwt_required()
-def getJobsByClient(client_id):
+def getFavorites_sByBook(book_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
 
     if user is None:
         raise APIException("Users not found", status_code=404)
         
-    favorites = Favorite.query.filter_by(id_book=book_id)
+    favorites = Favorites.query.filter_by(id_book=book_id)
     favorites_s = list(map(lambda favorites: favorites.serialize(), favorites))
 
     if favorites is None:
-        raise APIException("favorites not found", status_code=404)
+        raise APIException("avorites not found", status_code=404)
 
     response_body = {
         "msg": "ok",
-        "Jobs": jobs
+        "favorites": Favorites
     }
     return jsonify(response_body), 200
 
@@ -582,7 +575,7 @@ def updateFavorites(favorites_id):
     favorites = Favorites.query.get(favorites_id)
 
     if favorites is None:
-        raise APIException("Job not found", status_code=404)
+        raise APIException("Favorites not found", status_code=404)
 
     favorites.update()
 

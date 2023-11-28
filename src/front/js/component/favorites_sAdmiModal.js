@@ -2,30 +2,30 @@ import React, { useContext, useEffect } from 'react'
 import { Context } from '../store/appContext'
 import PropTypes from "prop-types";
 
-export const JobsAdmiModal = (...props) => {
+export const Favorites_sAdmiModal = (...props) => {
 
     const { store, actions } = useContext(Context)
 
     useEffect(() => {
-        actions.get_all_clients()
+        actions.get_all_books()
         actions.get_all_users()
     }, [])
 
     return (
         <form className='modal' id="exampleModal" tabIndex="-1" style={{ display: store.show_modal ? "inline-block" : "none" }} onSubmit={(e) => {
             e.preventDefault()
-            if (!!store.job_id) {
-                actions.update_job_by_id(store.job_id.id)
+            if (!!store.favorites_id) {
+                actions.update_jfavorites_by_id(store.favorites_id.id)
                 e.target.reset()
             } else {
-                actions.add_job()
+                actions.add_favorites()
                 e.target.reset()
             }
         }}>
             <div className="modal-dialog modal-dialog-centered p-1 fs-5">
-                <div className="modal-content jobsModalContent p-2">
+                <div className="modal-content favorites_sModalContent p-2">
                     <div className="modal-header">
-                        <h5 className="modal-title fw-bold fs-5">Job</h5>
+                        <h5 className="modal-title fw-bold fs-5">Favorites</h5>
                         <button type="reset" className="close btn btn-login fw-bold text-center fw-bold fs-5"
                             onClick={() => { actions.handle_delete_modal() }}>
                             <i className="fa-solid fa-xmark"></i>
@@ -34,155 +34,49 @@ export const JobsAdmiModal = (...props) => {
                     <div className="modal-body">
                         <div className="form-group mb-2">
                             <label htmlFor="userId" className="modal-label-input"
-                                hidden={store.hidden_id} >Job ID {!!store.job_id ? store.job_id.id : ""}
+                                hidden={store.hidden_id} >Favorites ID {!!store.favorites_id ? store.favorites_id.id : ""}
                             </label>
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="code" className="modal-label-input">Code</label>
-                            <input
-                                type="text"
-                                className="form-control formModalJobs"
-                                id="code"
-                                name="code"
-                                onChange={actions.handle_change}
-                                defaultValue={!!store.job_id ? store.job_id.code : store.code}
-                                readOnly
-                            />
-                        </div>
-                        <div className="form-group mb-2">
                             <label htmlFor="type" className="modal-label-input">Type</label>
-                            <div className="input-group group-job-modal mb-3 input-select">
-                                <select className="form-select select-jobs-modal" id="inputGroupTypes" onChange={actions.handle_change} name='type'>
-                                    <option className='option-job-modal' defaultValue="null">Select the type</option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.type == "laptop" ? true : false}
-                                        value="laptop" >Laptop
+                            <div className="input-group group-favorites-modal mb-3 input-select">
+                                <select className="form-select select-favorites_s-modal" id="inputGroupTypes" onChange={actions.handle_change} name='type'>
+                                    <option className='option-favorites-modal' defaultValue="null">Select the type</option>
+                                    <option className='option-favorites-modal'
+                                        selected={!!store.favorites_id && store.favorites_id.type == "horror" ? true : false}
+                                        value="horror" >Horor
                                     </option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.type == "cpu" ? true : false}
-                                        value="cpu">Cpu
+                                    <option className='option-favorites-modal'
+                                        selected={!!store.favorites_id && store.jfavorites_id.type == "comedy" ? true : false}
+                                        value="comedy">Comedy
                                     </option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.type == "monitor" ? true : false}
-                                        value="monitor">Monitor
+                                    <option className='option-favorites-modal'
+                                        selected={!!store.favorites_id && store.favorites_id.type == "poetry" ? true : false}
+                                        value="poetry">Poetry
                                     </option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.type == "printer" ? true : false}
-                                        value="printer">Printer
+                                    <option className='option-favorites-modal'
+                                        selected={!!store.favorites_id && store.favorites_id.type == "fantasy" ? true : false}
+                                        value="fantasy">Fantasy
                                     </option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.type == "ups" ? true : false}
-                                        value="ups">UPS
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className="form-group mb-2">
-                            <label htmlFor="brand" className="modal-label-input">Brand</label>
-                            <input
-                                type="text"
-                                className="form-control formModalJobs"
-                                id="brand"
-                                name="brand"
-                                onChange={actions.handle_change}
-                                defaultValue={!!store.job_id ? store.job_id.brand : ""}
-                            />
-                        </div>
-                        <div className="form-group mb-2">
-                            <label htmlFor="model" className="modal-label-input">Model</label>
-                            <input
-                                type="text"
-                                className="form-control formModalJobs"
-                                id="model"
-                                name="model"
-                                onChange={actions.handle_change}
-                                defaultValue={!!store.job_id ? store.job_id.model : ""}
-                            />
-                        </div>
-                        <div className="form-group mb-2">
-                            <label htmlFor="serial_number" className="modal-label-input">Serial Number</label>
-                            <input
-                                type="text"
-                                className="form-control formModalJobs"
-                                id="serial_number"
-                                name="serial_number"
-                                onChange={actions.handle_change}
-                                defaultValue={!!store.job_id ? store.job_id.serial_number : ""}
-                            />
-                        </div>
-                        <div className="form-group mb-2">
-                            <label htmlFor="status" className="modal-label-input">Status</label>
-                            <div className="input-group group-jobs-modal mb-3 input-select">
-                                <select className="form-select select-jobs-modal" id="inputGroupStatus" onChange={actions.handle_change}
-                                    name='status'>
-                                    <option className='option-job-modal' defaultValue="null">Select the status</option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.status == "recieve" ? true : false}
-                                        value="recieve">Received
-                                    </option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.status == "review" ? true : false}
-                                        value="review">Reviewed
-                                    </option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.status == "repair_in_progress" ? true : false}
-                                        value="repair_in_progress">Repair in Progress
-                                    </option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.status == "cancel" ? true : false}
-                                        value="cancel">Canceled
-                                    </option>
-                                    <option className='option-job-modal'
-                                        selected={!!store.job_id && store.job_id.status == "finish" ? true : false}
-                                        value="finish">Finished
+                                    <option className='option-favorites-modal'
+                                        selected={!!store.favorites_id && store.favorites_id.type == "sci-fy" ? true : false}
+                                        value="sci-fy">Sci-fy
                                     </option>
                                 </select>
                             </div>
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="issues" className="modal-label-input">Issues</label>
-                            <textarea
-                                rows="3"
-                                className="form-control formModalJobs"
-                                id="issues"
-                                name="issues"
-                                onChange={actions.handle_change}
-                                defaultValue={!!store.job_id ? store.job_id.issues : ""}
-                            />
-                        </div>
-                        <div className="form-group mb-2">
-                            <label htmlFor="technical" className="modal-label-input">Technical</label>
-                            <div className="input-group group-jobs-modal mb-3 input-select">
-                                <select className="form-select select-jobs-modal" id="inputGroupTechnical" onChange={actions.handle_change}
-                                    name='technical_id'>
-                                    <option className='option-job-modal' defaultValue="null">Select the Technical</option>
-                                    {!!store.users && store.users.map((user, index) => {
-                                        if (user.role == "technical") {
-                                            return (
-                                                <option key={index}
-                                                    className='option-job-modal'
-                                                    selected={!!store.job_id && store.job_id.technical.id == user.id ? true : false}
-                                                    value={user.id}>{user.id} - {user.first_name} {user.last_name}
-                                                </option>
-                                            )
-                                        }
-                                    })}
-                                </select>
-                            </div>
-                        </div>
-                        <div className="form-group mb-2">
-                            <label htmlFor="client" className="modal-label-input">Client</label>
-                            <div className="input-group group-jobs-modal mb-3 input-select">
-                                <select className="form-select select-jobs-modal" id="inputGroupClient" onChange={actions.handle_change}
-                                    name='client_id'>
-                                    <option className='option-job-modal' defaultValue="null">Select the Client</option>
-                                    {!!store.clients && store.clients.map((client, index) => {
+                            <label htmlFor="book" className="modal-label-input">Book</label>
+                            <div className="input-group group-favorites_s-modal mb-3 input-select">
+                                <select className="form-select select-favorites_s-modal" id="inputGroupBook" onChange={actions.handle_change}
+                                    name='book_id'>
+                                    <option className='option-favorites-modal' defaultValue="null">Select the Book</option>
+                                    {!!store.books && store.books.map((book, index) => {
                                         return (
                                             <option key={index}
-                                                className='option-job-modal'
-                                                selected={!!store.job_id && store.job_id.client.id == client.id ? true : false}
-                                                value={client.id}>{client.id} - {client.first_name} {client.last_name}
+                                                className='option-favorites-modal'
+                                                selected={!!store.favorites_id && store.favorites_id.book.id == book.id ? true : false}
+                                                value={book.id}>{book.id} - {book.description} {client.author}
                                             </option>
                                         )
                                     })}
@@ -194,17 +88,17 @@ export const JobsAdmiModal = (...props) => {
                             <label htmlFor="comments" className="modal-label-input">Comments</label>
                             <textarea
                                 rows="3"
-                                className="form-control formModalJobs"
+                                className="form-control formModalFavorites_s"
                                 id="comments"
                                 name="comments"
                                 onChange={actions.handle_change}
-                                defaultValue={!!store.job_id ? store.job_id.comments : ""}
+                                defaultValue={!!store.favorites_id ? store.favorites_id.comments : ""}
                             />
                         </div>
                         <div className="form-group mb-2">
                             <label htmlFor="time_stamp" className="modal-label-input" hidden={store.hidden_time_stamp}>
                                 <i className="fa-regular fa-clock me-1">
-                                </i>Time Stamp: {!!store.job_id ? new Date(store.job_id.time_stamp).toLocaleString() : ""}
+                                </i>Time Stamp: {!!store.favorites_id ? new Date(store.favorites_id.time_stamp).toLocaleString() : ""}
                             </label>
                         </div>
                     </div>
@@ -214,7 +108,7 @@ export const JobsAdmiModal = (...props) => {
                         </button>
                         <button type="button" className="btn btn-login fw-bold text-center fs-5"
                             hidden={store.hidden_btn_new_code}
-                            onClick={() => { actions.random_code_job() }}>
+                            onClick={() => { actions.random_code_favorites() }}>
                             New Code
                         </button>
                         <button type="reset" className="btn btn-login fw-bold text-center fs-5">
@@ -226,10 +120,10 @@ export const JobsAdmiModal = (...props) => {
         </form>
     )
 }
-JobsAdmiModal.propTypes = {
+Favorites_sAdmiModal.propTypes = {
     show: PropTypes.bool
 }
-JobsAdmiModal.defaultProps = {
+Favorites_sAdmiModal.defaultProps = {
     show: false
 }
 

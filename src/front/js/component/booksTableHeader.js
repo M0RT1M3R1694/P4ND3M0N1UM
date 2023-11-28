@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ClientsTableHeader = () => {
+export const BooksTableHeader = () => {
     return (
         <section className="intro">
             <div className="h-100">
@@ -9,16 +9,14 @@ export const ClientsTableHeader = () => {
                         <div className="row justify-content-center">
                             <div className="col-12">
                                 <div className="card tableHeader text-center">
-                                    <div className="card-body cardBodyClients fs-4">
+                                    <div className="card-body cardBodyBooks fs-4">
                                         <div className="table-responsive">
                                             <table className="table mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" className="text-white text-center cell-size">Client ID</th>
-                                                        <th scope="col" className="text-white text-center cell-size">First Name</th>
-                                                        <th scope="col" className="text-white text-center cell-size">Last Name</th>
-                                                        <th scope="col" className="text-white text-center cell-size">Phone</th>
-                                                        <th scope="col" className="text-white text-center cell-size">Actions</th>
+                                                        <th scope="col" className="text-white text-center cell-size">Book ID</th>
+                                                        <th scope="col" className="text-white text-center cell-size">Description</th>
+                                                        <th scope="col" className="text-white text-center cell-size">Author</th>
                                                     </tr>
                                                 </thead>
                                             </table>
