@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import '../../styles/login.css'
-import logo from "../../img/logo.png"
+import logo from "../../img/logo.jpg"
 import { Link, useNavigate } from 'react-router-dom'
 import { Context } from '../store/appContext'
 

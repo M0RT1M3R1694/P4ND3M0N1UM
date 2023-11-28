@@ -1,29 +1,29 @@
 import React, { useContext, useEffect } from 'react'
 import "../../styles/clients.css";
-import { ClientsTable } from '../component/clientsTable';
-import { ClientsTableHeader } from '../component/clientsTableHeader';
-import { ClientsButtons } from '../component/clientsButtons';
+import { BooksTable } from '../component/booksTable';
+import { BooksTableHeader } from '../component/booksTableHeader';
+import { BooksButtons } from '../component/booksButtons';
 import { Context } from '../store/appContext';
-import { ClientsModal } from '../component/clientsModal';
+import { ClientsModal } from '../component/booksModal';
 
-export const Clients = () => {
+export const Books = () => {
 
     const { store, actions } = useContext(Context)
 
     useEffect(() => {
-        actions.get_all_clients()
+        actions.get_all_books()
     }, [store.show_modal])
 
     return (
         <>
-            <ClientsButtons />
-            <ClientsTableHeader />
-            {!!store.clients && store.clients.map((client, index) => {
+            <BooksButtons />
+            <BooksTableHeader />
+            {!!store.books && store.books.map((book, index) => {
                 return (
-                    <ClientsTable key={index} client={client} />
+                    <BooksTable key={index} book={book} />
                 )
             })}
-            <ClientsModal show={store.show_modal}/>
+            <BooksModal show={store.show_modal}/>
         </>
     )
 }
