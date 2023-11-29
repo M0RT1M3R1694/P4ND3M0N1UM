@@ -1,6 +1,6 @@
 import React, { Component, useContext } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../img/logo.png"
+import logo from "../../img/logo.jpg"
 import { Context } from "../store/appContext";
 
 export const Footer = () => {

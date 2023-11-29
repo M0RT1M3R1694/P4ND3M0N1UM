@@ -1,11 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import CardSearchCode from "../component/cardSearchCode";
-
-import CardOffers from "../component/cardOffers";
-import CardInformation from "../component/cardInformation";
-
 
 export const Home = () => {
 	const { store, actions } = useContext(Context)
@@ -23,9 +18,6 @@ export const Home = () => {
 					<h3 className="title-home">Our Job</h3>
 					<div className="row">
 						<div className="col-lg-6">
-							<CardSearchCode />
-						</div>
-						<div className="col-lg-6">
 							<div className="container-textHome m-3">
 								<h6 className="subtitles-home"><i className="fa-solid fa-lightbulb"></i> The simplest way to stay updated on your team and process.</h6>
 								<p className="text-homeau">On our IT page, we offer you a comprehensive solution for all your technological needs.
@@ -40,9 +32,6 @@ export const Home = () => {
 				</section>
 
 				<section>
-					<div className="container-cardInfHome">
-						<CardInformation />
-					</div>
 				</section>
 
 				<section className="portfolio">
@@ -109,10 +98,6 @@ export const Home = () => {
 
 						</div>
 					</div>
-				</section>
-
-				<section className="offers">
-					<CardOffers />
 				</section>
 
 				<section className="team-home">
