@@ -11,15 +11,7 @@ from api.models import db, User,Book,Favorites,Category
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
-from flask_bcrypt import Bcrypt
-from flask_jwt_extended import (
-    jwt_required,
-    get_jwt_identity,
-    create_access_token,
-    JWTManager,
-)
 from flask import Flask
-from flask_mail import Mail, Message
 from flask import Flask, make_response
 from datetime import datetime
 
@@ -31,11 +23,9 @@ static_file_dir = os.path.join(
     os.path.dirname(os.path.realpath(__file__)), "../public/"
 )
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 app.url_map.strict_slashes = False
 
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWS_SECRET")
-jwt = JWTManager(app)
 
 # database configuration
 db_url = os.getenv("DATABASE_URL")
@@ -57,7 +47,6 @@ MIGRATE = Migrate(app, db, compare_type=True)
 
 db.init_app(app)
 # <----------------- NODEMAILER----------------------->
-mail = Mail(app)
 
 # Allow CORS requests to this API
 CORS(app)
@@ -134,7 +123,6 @@ def addLogin():
 
 
 @app.route('/user', methods=['GET'])
-@jwt_required()
 def getUsers():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -162,7 +150,6 @@ def getUsers():
 
 
 @app.route('/user/<int:user_id>', methods=['GET'])
-@jwt_required()
 def getUserById(user_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -212,7 +199,6 @@ def getUserByUsername(user_username):
 
 
 @app.route('/user', methods=['POST'])
-@jwt_required()
 def addUser():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -301,7 +287,6 @@ def updateUser(user_id):
 
 
 @app.route('/user/<int:user_id>', methods=['DELETE'])
-@jwt_required()
 def deleteUser(user_id):
     current_user = get_jwt_identity()
     user_current = User.query.filter_by(username=current_user).first()
@@ -322,7 +307,6 @@ def deleteUser(user_id):
 
 
 @app.route('/books', methods=['GET'])
-@jwt_required()
 def getBooks():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -350,7 +334,6 @@ def getBooks():
 
 
 @app.route('/book/<int:book_id>', methods=['GET'])
-@jwt_required()
 def getBook(book_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -382,7 +365,6 @@ def getBook(book_id):
 
 
 @app.route('/book', methods=['POST'])
-@jwt_required()
 def addBook():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -425,7 +407,6 @@ def addBook():
 
 
 @app.route('/book/<int:book_id>', methods=['PUT'])
-@jwt_required()
 def updateBook(book_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -463,7 +444,6 @@ def updateBook(book_id):
 
 
 @app.route('/book/<int:book_id>', methods=['DELETE'])
-@jwt_required()
 def deleteBook(book_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -492,7 +472,6 @@ def deleteBook(book_id):
 
 
 @app.route('/favorites', methods=['GET'])
-@jwt_required()
 def getFavorites():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -520,7 +499,6 @@ def getFavorites():
 
 
 @app.route('/favorites/<int:favorites_id>', methods=['GET'])
-@jwt_required()
 def getFavoritesById(favorites_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -543,7 +521,6 @@ def getFavoritesById(favorites_id):
     return jsonify(response_body), 200
 
 @app.route('/favorites/book/<int:book_id>', methods=['GET'])
-@jwt_required()
 def getFavorites_sByBook(book_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -564,7 +541,6 @@ def getFavorites_sByBook(book_id):
     return jsonify(response_body), 200
 
 @app.route('/favorites/<int:favorites_id>', methods=['PUT'])
-@jwt_required()
 def updateFavorites(favorites_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -588,7 +564,6 @@ def updateFavorites(favorites_id):
 
 
 @app.route('/favorites/<int:favorites_id>', methods=['DELETE'])
-@jwt_required()
 def deletefavorites(favorites_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
