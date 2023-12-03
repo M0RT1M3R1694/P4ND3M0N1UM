@@ -17,26 +17,26 @@ export const Footer = () => {
 					<span className="fs-4 footer-title">Explore</span>
 				</div>
 				<div className="col">
-					<Link to="/users" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.users}>
-						<span className="footer-span">Users</span>
+					<Link to="/users" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.user}>
+						<span className="footer-span">COMUNITY</span>
 					</Link>
 				</div>
 
 				<div className="col">
-					<Link to="/books" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.books}>
-						<span className="footer-span">Books</span>
+					<Link to="/books" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.book}>
+						<span className="footer-span">BOOKS</span>
 					</Link>
 				</div>
 
 				<div className="col">
-					<Link to="/favorites_s/admi" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.favorites_s_admin}>
-						<span className="footer-span">Favorites</span>
+					<Link to="/favorites_s/admi" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.favorites_admin}>
+						<span className="footer-span">FAVORITES</span>
 					</Link>
 				</div>
 
 				<div className="col">
 					<Link to="/ourServices" className="link-footer text-decoration-none">
-						<span className="footer-span">Services</span>
+						<span className="footer-span">CATEGORIES</span>
 					</Link>
 				</div>
 

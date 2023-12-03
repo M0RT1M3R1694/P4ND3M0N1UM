@@ -12,7 +12,7 @@ body {
   
   .navbar,
   .footer {
-    background: #41206C;
+    background: #000000;
     font-family: 'EB Garamond', serif;
     font-size: 1.4rem;
     line-height: 140%;
@@ -52,8 +52,8 @@ body {
   }
   
   .nav-img {
-    width: 4rem;
-    height: 3.5rem;
+    width: 5rem;
+    height: 5rem;
   }
   
   .navbar-toggler {
@@ -90,7 +90,7 @@ body {
   
   
   .logo-footer {
-    width: 75%;
+    width: 25%;
     
   }
   

@@ -316,7 +316,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			delete_user_change: () => {
 				setStore({ user_deleted: false })
 			},
-
+            add_favorites: (selectedItem) => {
+				let listOfFavorites = getStore().favorites;
+				if (!listOfFavorites.includes(selectedItem)) {
+					setStore({ favorites: listOfFavorites.concat(selectedItem) });
+				}
+			},
+			//delete selectedFavorite from favorites' list
+			delete_favorites: (selectedFavorite) => {
+				let listOfFavorites = getStore().favorites;
+				setStore({ favorites: listOfFavorites.filter((item) => item !== selectedFavorite) });
+			},
 			get_all_books: async () => {
 				const token = localStorage.getItem('jwt-token')
 				const response = await fetch(process.env.BACKEND_URL + '/book', {
@@ -356,15 +366,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					book.name = store.name
 				}
 				if (store.description != null) {
-					client.description = store.ldescription
+					book.description = store.ldescription
 				}
 				if (store.author != null) {
-					client.author = store.author
+					book.author = store.author
 				}
 
 				const response = await fetch(process.env.BACKEND_URL + '/book', {
 					method: 'POST',
-					body: JSON.stringify(client),
+					body: JSON.stringify(book),
 					headers: {
 						"Content-Type": "application/json",
 						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
