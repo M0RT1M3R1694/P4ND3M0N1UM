@@ -40,7 +40,7 @@ export const Footer = () => {
 			</div>
 			<div className="col-md-12 col-lg-2 col-sm-12 text-center m-auto">
 				<div className="col">
-					<span className="mb-0 fs-4">Pandemonium</span>
+					<span className="mb-0 fs-4">P4ND3M0N1UM</span>
 					<br></br>
 				</div>
 				<div className="col my-2 ">
@@ -49,7 +49,7 @@ export const Footer = () => {
 
 			</div>
 			<hr className="mt-2 hr-footer"></hr>
-			<span className="text-center mt-3">© Copyright Pandemonium</span>
+			<span className="text-center mt-3">© Copyright P4ND3M0N1UM</span>
 		</div>
 	</footer >
 )};

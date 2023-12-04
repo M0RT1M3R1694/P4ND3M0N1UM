@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-
+import pytz
 
 import enum
 
@@ -8,6 +8,10 @@ db = SQLAlchemy()
 
 class role(enum.Enum):
     admin = "admin"
+    technical = "technical"
+
+    class questions(enum.Enum):
+    pet = "What is the name of your first pet?"
 
 class User(db.Model):
 
@@ -28,6 +32,9 @@ class User(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "email": self.email,
+            "role": self.role.value,
+            "question_security": self.question_security.value,
+            "answer_security": self.answer_security
             # do not serialize the password, its a security breach
         }
 

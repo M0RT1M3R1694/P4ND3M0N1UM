@@ -12,7 +12,7 @@ export const Favorites_sAdmi = () => {
 
     useEffect(() => {
         actions.get_all_favorites_s()
-    }, [store.show_modal, store.favorites_deleted])
+    }, [store.show_modal, store.favorites_sdeleted])
 
     return (
         <>

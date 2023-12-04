@@ -20,27 +20,27 @@ export const Navbar = () => {
 					<ul className="navbar-nav ms-auto mb-lg-0">
 						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.user}>
 							<Link to="/users" className="nav-link text-decoration-none" >
-								<span className="nav-span">COMUNITY</span>
+								<span className="nav-span">C0MUN1TY</span>
 							</Link>
 						</li>
 						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.book}>
 							<Link to="/clients" className="nav-link text-decoration-none">
-								<span className="nav-span">BOOKS</span>
+								<span className="nav-span">B00KS</span>
 							</Link>
 						</li>
 						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.favorites}>
 							<Link to="/jobs/admi" className="nav-link text-decoration-none">
-								<span className="nav-span">CATEGORIES</span>
+								<span className="nav-span">C4T3G0R13S</span>
 							</Link>
 						</li>
-						***<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.favorites}>
+						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.favorites}>
 							<Link to="/jobs/admi" className="nav-link text-decoration-none">
-								<span className="nav-span">FAVORITES</span>
+								<span className="nav-span">F4V0R1T3S</span>
 							</Link>
-						***</li>
+						</li>
 						<li className="nav-item ms-3 me-2 mt-2" hidden={store.buttons_admin_tech.login}>
 							<Link to="/login" className="text-decoration-none" >
-								<button className="btn btn-login"><i className="fa-regular fa-user me-2"></i>LOGIN</button>
+								<button className="btn btn-login"><i className="fa-regular fa-user me-2"></i>L0G1N</button>
 							</Link>
 						</li>
 						<li className="nav-item ms-3 me-2 mt-2" hidden={store.buttons_admin_tech.account}>

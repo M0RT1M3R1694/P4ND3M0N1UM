@@ -4,7 +4,7 @@ import { BooksTable } from '../component/booksTable';
 import { BooksTableHeader } from '../component/booksTableHeader';
 import { BooksButtons } from '../component/booksButtons';
 import { Context } from '../store/appContext';
-import { ClientsModal } from '../component/booksModal';
+import { BooksModal } from '../component/booksModal';
 
 export const Books = () => {
 
