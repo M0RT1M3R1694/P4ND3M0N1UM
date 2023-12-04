@@ -9,9 +9,11 @@ export const Home = () => {
 		<div>
 			<header className="header-Home">
 				<section className="titles-header">
-					<h1>WELCOME TO HELL</h1>
-					<h2>WILLKOMMEN IN DER HÖLLE</h2>
-					<h2>ДОБРО ПОЖАЛОВАТЬ В (АД </h2>
+					<h1>WELCOME TO HELL</h1><br>
+					</br>
+					<h1>WILLKOMMEN IN DER HÖLLE</h1><br>
+					</br>
+					<h1>ДОБРО ПОЖАЛОВАТЬ В (АД </h1>
 				</section>
 			</header>
 			<main>

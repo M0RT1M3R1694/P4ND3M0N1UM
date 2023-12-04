@@ -195,7 +195,7 @@ h6.subtitles-home {
 
 .container-ourClients {
     width: 100%;
-    padding: 1rem;
+    padding: 2rem;
     margin-top: 3rem;
     margin-bottom: 3rem;
     background-color: #00000016;
@@ -296,7 +296,7 @@ h6.subtitles-home {
     margin: auto;
     width: 70%;
     height: 30rem;
-    background: url(https://e1.pxfuel.com/desktop-wallpaper/911/61/desktop-wallpaper-the-best-gamer-headsets-to-buy-gaming-headphones.jpg);
+    background:white;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left;
@@ -414,7 +414,7 @@ h6.subtitles-home {
 .card-information {
     margin-bottom: 1rem;
     border-radius: 1.25rem;
-    background: #41206C;
+    background: whiteC;
 }
 
 .card-img-top {
