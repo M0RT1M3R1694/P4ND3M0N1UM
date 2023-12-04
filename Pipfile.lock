@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "74f92d76f687bb774828613a3a513123fe2ffdb429b95b351d29721dddfd3fb8"
+            "sha256": "dc8797e53158cddccfb4bc272b949cba3c69838458ce17c953c8697d903f6440"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -247,6 +247,13 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==2.1.2"
+        },
+        "migrate": {
+            "hashes": [
+                "sha256:5cca9d963f75b65b97e3e13456cbeecb7012610b1d515ce254daeb5be9d4b7e7"
+            ],
+            "index": "pypi",
+            "version": "==0.3.8"
         },
         "psycopg2-binary": {
             "hashes": [
