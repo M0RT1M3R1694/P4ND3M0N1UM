@@ -14,7 +14,7 @@ export const BooksTableHeader = () => {
                                             <table className="table mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" className="text-white text-center cell-size">Book ID</th>
+                                                        <th scope="col" className="text-white text-center cell-size">Name</th>
                                                         <th scope="col" className="text-white text-center cell-size">Description</th>
                                                         <th scope="col" className="text-white text-center cell-size">Author</th>
                                                     </tr>

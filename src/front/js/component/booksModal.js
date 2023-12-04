@@ -34,7 +34,7 @@ export const BooksModal = (...props) => {
                             <label htmlFor="bookId" className="modal-label-input" hidden={store.hidden_id}>Book ID {!!store.book_id ? store.book_id.id : ""}</label>
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="firstName" className="modal-label-input">First Name</label>
+                            <label htmlFor="firstName" className="modal-label-input">Name</label>
                             <input
                                 type="text"
                                 className="form-control formModalBooks"
@@ -45,7 +45,7 @@ export const BooksModal = (...props) => {
                             />
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="lastName" className="modal-label-input">Last Name</label>
+                            <label htmlFor="lastName" className="modal-label-input">Author</label>
                             <input
                                 type="text"
                                 className="form-control formModalBooks"

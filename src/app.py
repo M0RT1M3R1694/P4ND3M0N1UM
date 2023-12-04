@@ -152,7 +152,7 @@ def getUsers():
 @app.route('/user/<int:user_id>', methods=['GET'])
 def getUserById(user_id):
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
 
     if user is None:
         raise APIException("User not found", status_code=404)
@@ -160,7 +160,7 @@ def getUserById(user_id):
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)
 
-    user = User.query.get(user_id)
+    user = Users.query.get(user_id)
     
     if user is None:
         raise APIException("Users not found", status_code=404)
@@ -180,7 +180,7 @@ def getUserById(user_id):
 
 @app.route('/user/<string:user_username>', methods=['GET'])
 def getUserByUsername(user_username):
-    user = User.query.filter_by(username=user_username).first()
+    user = Users.query.filter_by(username=user_username).first()
 
     if user is None:
         raise APIException("User not found", status_code=404)
@@ -201,7 +201,7 @@ def getUserByUsername(user_username):
 @app.route('/user', methods=['POST'])
 def addUser():
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
     
     if user is None:
         raise APIException("User not found", status_code=404)
@@ -226,7 +226,7 @@ def addUser():
     if "password" not in request_body or request_body["password"] == "":
         raise APIException("The password is required", status_code=404)
 
-    username_exist = User.query.filter_by(
+    username_exist = Users.query.filter_by(
         username=request_body['username']).first()
 
     if username_exist:
@@ -235,7 +235,7 @@ def addUser():
     pw_hash = bcrypt.generate_password_hash(
         request_body['password']).decode("utf-8")
 
-    user = User(
+    user = Users(
         username=request_body['username'],
         first_name=request_body['first_name'],
         last_name=request_body['last_name'],
@@ -255,7 +255,7 @@ def addUser():
 @app.route('/user/<int:user_id>', methods=['PUT'])
 def updateUser(user_id):
     
-    user = User.query.get(user_id)
+    user = Users.query.get(user_id)
     request_body = request.get_json(force=True, silent=True)
 
     if user is None:
@@ -289,10 +289,10 @@ def updateUser(user_id):
 @app.route('/user/<int:user_id>', methods=['DELETE'])
 def deleteUser(user_id):
     current_user = get_jwt_identity()
-    user_current = User.query.filter_by(username=current_user).first()
+    user_current = Users.query.filter_by(username=current_user).first()
     
-    user = User.query.get(user_id)
-    admin = User.query.filter_by(role = "admin").first()
+    user = Users.query.get(user_id)
+    admin = Users.query.filter_by(role = "admin").first()
 
     user.delete()
 
@@ -309,7 +309,7 @@ def deleteUser(user_id):
 @app.route('/books', methods=['GET'])
 def getBooks():
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
 
     if user is None:
         raise APIException("Book not found", status_code=404)
@@ -317,12 +317,12 @@ def getBooks():
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)
 
-    book = Book.query.all()
+    book = Books.query.all()
     
     if book is None:
         raise APIException("Book not found", status_code=404)
     
-    books = list(map(lambda book: book.serialize(), books))
+    books = lists(map(lambda book: book.serialize(), books))
     sorted_books = sorted(books, key=lambda book: book['id'])
 
     response_body = {
@@ -336,7 +336,7 @@ def getBooks():
 @app.route('/book/<int:book_id>', methods=['GET'])
 def getBook(book_id):
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
 
     if user is None:
         raise APIException("User not found", status_code=404)
@@ -367,7 +367,7 @@ def getBook(book_id):
 @app.route('/book', methods=['POST'])
 def addBook():
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
 
     if user is None:
         raise APIException("User not found", status_code=404)
@@ -383,7 +383,7 @@ def addBook():
     if "last_name" not in request_body or request_body["last_name"] == "":
         raise APIException("The last name is required")
     
-    book_exist = Book.query.filter_by(
+    book_exist = Booksquery.filter_by(
         first_name=request_body['first_name'], 
         last_name=request_body['last_name'], 
         
@@ -391,7 +391,7 @@ def addBook():
     if book_exist:
         raise APIException("The book already exist", status_code=400)
 
-    book = Book(
+    book = Books(
         description=request_body['description'],
         author=request_body['author'],
     )
@@ -409,7 +409,7 @@ def addBook():
 @app.route('/book/<int:book_id>', methods=['PUT'])
 def updateBook(book_id):
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
 
     if user is None:
         raise APIException("User not found", status_code=404)
@@ -418,7 +418,7 @@ def updateBook(book_id):
         raise APIException("Access denied", status_code=403)
     
     request_body = request.get_json(force=True, silent=True)
-    book = Book.query.get(book_id)
+    book = Books.query.get(book_id)
 
     if book is None:
         raise APIException("Book not found", status_code=404)
@@ -446,7 +446,7 @@ def updateBook(book_id):
 @app.route('/book/<int:book_id>', methods=['DELETE'])
 def deleteBook(book_id):
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
     
     if user is None:
         raise APIException("User not found", status_code=404)
@@ -454,7 +454,7 @@ def deleteBook(book_id):
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)
     
-    book = Book.query.get(book_id)
+    book = Books.query.get(book_id)
 
     if book is None:
         raise APIException("Book not found", status_code=400)
@@ -474,7 +474,7 @@ def deleteBook(book_id):
 @app.route('/favorites', methods=['GET'])
 def getFavorites():
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
     
     if user is None:
         raise APIException("Users not found", status_code=404)
@@ -482,12 +482,12 @@ def getFavorites():
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)
     
-    favorites = Favorites.query.all()
+    favorites = Favorites_s.query.all()
 
     if favorites is None:
         raise APIException("Favorites not found")
 
-    favorites_s = list(map(lambda favorites: favorites.serialize(), favorites))
+    favorites_s = lists(map(lambda favorites: favorites.serialize(), favorites))
 
     sorted_favorites_s = sorted(favorites_s, key=lambda favorites: favorites['id'])
     
@@ -501,12 +501,12 @@ def getFavorites():
 @app.route('/favorites/<int:favorites_id>', methods=['GET'])
 def getFavoritesById(favorites_id):
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
     
     if user is None:
         raise APIException("User not found", status_code=404)
     
-    favorites = Favorites.query.get(favorites_id)
+    favorites = Favorites_s.query.get(favorites_id)
 
     if favorites is None:
         raise APIException("Favorites not found", status_code=404)
@@ -523,12 +523,12 @@ def getFavoritesById(favorites_id):
 @app.route('/favorites/book/<int:book_id>', methods=['GET'])
 def getFavorites_sByBook(book_id):
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Users.query.filter_by(username=current_user).first()
 
     if user is None:
         raise APIException("Users not found", status_code=404)
         
-    favorites = Favorites.query.filter_by(id_book=book_id)
+    favorites = Favorites_s.query.filter_by(id_book=book_id)
     favorites_s = list(map(lambda favorites: favorites.serialize(), favorites))
 
     if favorites is None:
@@ -536,19 +536,19 @@ def getFavorites_sByBook(book_id):
 
     response_body = {
         "msg": "ok",
-        "favorites": Favorites
+        "favorites": Favorites_s
     }
     return jsonify(response_body), 200
 
 @app.route('/favorites/<int:favorites_id>', methods=['PUT'])
 def updateFavorites(favorites_id):
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Usersquery.filter_by(username=current_user).first()
     
     if user is None:
         raise APIException("User not found", status_code=404)
     
-    favorites = Favorites.query.get(favorites_id)
+    favorites = Favorites_s.query.get(favorites_id)
 
     if favorites is None:
         raise APIException("Favorites not found", status_code=404)
@@ -566,7 +566,7 @@ def updateFavorites(favorites_id):
 @app.route('/favorites/<int:favorites_id>', methods=['DELETE'])
 def deletefavorites(favorites_id):
     current_user = get_jwt_identity()
-    user = User.query.filter_by(username=current_user).first()
+    user = Usersquery.filter_by(username=current_user).first()
 
     if user is None:
         raise APIException("User not found", status_code=404)
@@ -574,7 +574,7 @@ def deletefavorites(favorites_id):
     if user.role.value != "admin":
         raise APIException("Access denied", status_code=403)
     
-    favorites = Favorites.query.get(favorites_id)
+    favorites = Favorites_s.query.get(favorites_id)
 
     if favorites is None:
         raise APIException("Favorites not found", status_code=404)

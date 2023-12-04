@@ -13,9 +13,6 @@ export const Footer = () => {
 			</div>
 
 			<div className="col-lg-1 col-md-12 col-sm-12 text-center m-auto">
-				<div className="col mb-2">
-					<span className="fs-4 footer-title">Explore</span>
-				</div>
 				<div className="col">
 					<Link to="/users" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.user}>
 						<span className="footer-span">COMUNITY</span>

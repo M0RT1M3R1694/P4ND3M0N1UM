@@ -16,8 +16,8 @@ export const Favorites_sAdmi = () => {
 
     return (
         <>
-            <Favorites_sAdmiButtons />
-            <Favorites_sAdmiTableHeader />
+            <Favorites_sAdmiButtons/>
+            <Favorites_sAdmiTableHeader/>
             {!!store.favorites_s && store.favorites_s.map((favorites, index) => {
                 return(
 

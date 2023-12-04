@@ -27,28 +27,6 @@ export const UsersTable = ({ user }, ...props) => {
                                 <i className="fa-solid fa-circle-info me-2"></i>View Details
                               </button>
                             </td>
-                            <td className="text-center users-cell-size align-middle">
-                              <button className="btn btn-login text-center" onClick={() =>
-                                Swal.fire({
-                                  title: 'Are you sure?',
-                                  text: "You won't be able to revert this!",
-                                  icon: 'warning',
-                                  showCancelButton: true,
-                                  confirmButtonColor: '#d33',
-                                  cancelButtonColor: '#34AACB',
-                                  confirmButtonText: 'Yes, delete it!',
-                                  color: '#FFFFFF',
-                                  background: '#41206C'
-
-                                }).then((result) => {
-                                  if (result.isConfirmed) {
-                                    actions.delete_user_by_id(user)
-                                    actions.delete_user_change()
-                                  }
-                                })}>
-                                <i className="fa-solid fa-trash"></i>
-                              </button>
-                            </td>
                           </tr>
                         </tbody>
                       </table>

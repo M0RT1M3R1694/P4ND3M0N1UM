@@ -99,7 +99,7 @@ thead {
 .titleUsersTable {
     font-size: 2.5rem;
     font-weight: bolder;
-    background: var(--gradient-2, linear-gradient(129deg, #22B5BE 0%, #6743CC 100%));
+    background: var(--gradient-2, linear-gradient(129deg, #25be22 0%, #6743CC 100%));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

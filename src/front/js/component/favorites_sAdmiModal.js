@@ -44,15 +44,15 @@ export const Favorites_sAdmiModal = (...props) => {
                                     <option className='option-favorites-modal' defaultValue="null">Select the type</option>
                                     <option className='option-favorites-modal'
                                         selected={!!store.favorites_id && store.favorites_id.type == "horror" ? true : false}
-                                        value="horror" >Horor
+                                        value="horror" >Horror
                                     </option>
                                     <option className='option-favorites-modal'
                                         selected={!!store.favorites_id && store.jfavorites_id.type == "comedy" ? true : false}
-                                        value="comedy">Comedy
+                                        value="comedy">Thriller
                                     </option>
                                     <option className='option-favorites-modal'
                                         selected={!!store.favorites_id && store.favorites_id.type == "poetry" ? true : false}
-                                        value="poetry">Poetry
+                                        value="poetry">Mystery
                                     </option>
                                     <option className='option-favorites-modal'
                                         selected={!!store.favorites_id && store.favorites_id.type == "fantasy" ? true : false}
@@ -98,7 +98,7 @@ export const Favorites_sAdmiModal = (...props) => {
                         <div className="form-group mb-2">
                             <label htmlFor="time_stamp" className="modal-label-input" hidden={store.hidden_time_stamp}>
                                 <i className="fa-regular fa-clock me-1">
-                                </i>Time Stamp: {!!store.favorites_id ? new Date(store.favorites_id.time_stamp).toLocaleString() : ""}
+                                </i>Time Stamp: {!!store.favorites_id ? new Dates(store.favorites_id.time_stamp).toLocaleString() : ""}
                             </label>
                         </div>
                     </div>
@@ -109,7 +109,7 @@ export const Favorites_sAdmiModal = (...props) => {
                         <button type="button" className="btn btn-login fw-bold text-center fs-5"
                             hidden={store.hidden_btn_new_code}
                             onClick={() => { actions.random_code_favorites() }}>
-                            New Code
+                            New Fav
                         </button>
                         <button type="reset" className="btn btn-login fw-bold text-center fs-5">
                             Clear

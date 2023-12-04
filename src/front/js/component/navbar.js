@@ -30,9 +30,14 @@ export const Navbar = () => {
 						</li>
 						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.favorites}>
 							<Link to="/jobs/admi" className="nav-link text-decoration-none">
-								<span className="nav-span">FAVORITES</span>
+								<span className="nav-span">CATEGORIES</span>
 							</Link>
 						</li>
+						***<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.favorites}>
+							<Link to="/jobs/admi" className="nav-link text-decoration-none">
+								<span className="nav-span">FAVORITES</span>
+							</Link>
+						***</li>
 						<li className="nav-item ms-3 me-2 mt-2" hidden={store.buttons_admin_tech.login}>
 							<Link to="/login" className="text-decoration-none" >
 								<button className="btn btn-login"><i className="fa-regular fa-user me-2"></i>LOGIN</button>
