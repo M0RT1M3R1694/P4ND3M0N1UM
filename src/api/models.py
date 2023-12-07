@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-import pytz
+# import pytz
 
 import enum
 
@@ -8,9 +8,8 @@ db = SQLAlchemy()
 
 class role(enum.Enum):
     admin = "admin"
-    technical = "technical"
 
-    class questions(enum.Enum):
+class questions(enum.Enum):
     pet = "What is the name of your first pet?"
 
 class User(db.Model):

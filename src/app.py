@@ -39,8 +39,8 @@ else:
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'dev.solutions.@gmail.com'
-app.config['MAIL_PASSWORD'] = 'jfihzvwnbjmzgnkt'
+app.config['MAIL_USERNAME'] = 'xxx.@gmail.com'
+app.config['MAIL_PASSWORD'] = '1234*'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 MIGRATE = Migrate(app, db, compare_type=True)
