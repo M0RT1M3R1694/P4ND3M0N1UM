@@ -1,5 +1,6 @@
 import React from 'react'
 import '../../styles/ourCategories.css'
+import { OurCategoriesButtons } from '../component/ourCategoriesButtons'
 import { OurCategoriesTableHeader } from '../component/ourCategoriesTableHeader';
 import { OurCategoriesTable } from '../component/ourCategoriesTable'
 import { OurCategoriesModal } from '../component/ourCategoriesModal';
@@ -9,7 +10,8 @@ const OurCategories = () => {
 
     return (
         store.current_user == null ? <h1>Loading...</h1> :
-            store.current_user == false ? <h1>You must log in to view this page.</h1> :
+            store.current_user == false ? <h1>You must login to view this page.</h1> :
+
                 <div className='body1'>
                     <div className='services'>
                         <h1 className='tituloH1'>C4T3G0R13S</h1>

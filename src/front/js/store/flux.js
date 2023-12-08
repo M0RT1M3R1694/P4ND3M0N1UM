@@ -82,7 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("jwt-token", result.access_token);
 						localStorage.setItem("user_login", JSON.stringify(result.User))
 						setStore({ user_login: result.User })
-						actions.active_buttons_by_role()
+						// actions.active_buttons_by_role()
 						setStore({ is_logued: true })
 						actions.clear_store()
 

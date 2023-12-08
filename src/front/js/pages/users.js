@@ -10,12 +10,12 @@ export const Users = () => {
     const { store, actions } = useContext(Context)
 
     useEffect(() => {
-        actions.get_all_users()
+        // actions.get_all_users()
     }, [store.show_modal, store.user_deleted])
 
     return (
         store.current_user == null ? <h1>Loading...</h1> :
-            store.current_user == false ? <h1>You must log in to view this page.</h1> :
+            store.current_user == false ? <h1>You must login to view this page.</h1> :
                 <>
                     <UsersButtons />
                     <UsersTableHeader />

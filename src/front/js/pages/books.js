@@ -16,7 +16,7 @@ export const Books = () => {
 
     return (
         store.current_user == null ? <h1>Loading...</h1> :
-            store.current_user == false ? <h1>You must log in to view this page.</h1> :
+            store.current_user == false ? <h1>You must login to view this page.</h1> :
                 <>
                     <BooksButtons />
                     <BooksTableHeader />
