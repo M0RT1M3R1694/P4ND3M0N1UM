@@ -7,22 +7,24 @@ import { UsersModal } from '../component/usersModal';
 import { Context } from '../store/appContext';
 
 export const Users = () => {
-    const {store, actions} = useContext(Context)
+    const { store, actions } = useContext(Context)
 
-    useEffect(()=>{
+    useEffect(() => {
         actions.get_all_users()
-    },[store.show_modal, store.user_deleted])
-    
+    }, [store.show_modal, store.user_deleted])
+
     return (
-        <>
-            <UsersButtons />
-            <UsersTableHeader />
-            {!!store.users && store.users.map((user, index) =>{
-                return (
-                    <UsersTable key={index} user={user} />
-                )
-            })}
-           <UsersModal show={store.show_modal}/>
-        </>
+        store.current_user == null ? <h1>Loading...</h1> :
+            store.current_user == false ? <h1>You must log in to view this page.</h1> :
+                <>
+                    <UsersButtons />
+                    <UsersTableHeader />
+                    {!!store.users && store.users.map((user, index) => {
+                        return (
+                            <UsersTable key={index} user={user} />
+                        )
+                    })}
+                    <UsersModal show={store.show_modal} />
+                </>
     )
 }

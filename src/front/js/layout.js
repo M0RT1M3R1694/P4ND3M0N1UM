@@ -9,13 +9,11 @@ import { Footer } from "./component/footer";
 import { Books } from "./pages/books";
 import Login from "./pages/login";
 import ForgotPass from "./pages/fotgotPass";
-import OurServices from "./pages/ourCategories";
+import OurCategories from "./pages/ourCategories";
 import ChangePass from "./pages/changePass";
-import { Favorites_sTechnical } from "./pages/favorites_sTechnical";
 import { Users } from "./pages/users";
 import { Favorites_sAdmi } from "./pages/favorites_sAdmi";
 import BackToTopBtn from "./component/backToTopBtn";
-import PrivateRoutes from "../../utils/privateRoutes";
 
 
 
@@ -38,13 +36,9 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
-                        <Route element={<PrivateRoutes role={"admin"} />}>
-                            <Route element={<Favorites_sAdmi />} path="/favorites/admi" />
-                            <Route element={<Books />} path="/books" />
-                            <Route element={<Users />} path="/users" />
-                        </Route>
-                        <Route element={<PrivateRoutes role={"technical"} />}>
-                        </Route>
+                        <Route element={<Favorites_sAdmi />} path="/favorites_sadmi" />
+                        <Route element={<Books />} path="/books" />
+                        <Route element={<Users />} path="/users" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

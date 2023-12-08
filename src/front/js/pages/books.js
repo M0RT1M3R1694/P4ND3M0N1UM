@@ -15,15 +15,17 @@ export const Books = () => {
     }, [store.show_modal])
 
     return (
-        <>
-            <BooksButtons />
-            <BooksTableHeader />
-            {!!store.books && store.books.map((book, index) => {
-                return (
-                    <BooksTable key={index} book={book} />
-                )
-            })}
-            <BooksModal show={store.show_modal}/>
-        </>
+        store.current_user == null ? <h1>Loading...</h1> :
+            store.current_user == false ? <h1>You must log in to view this page.</h1> :
+                <>
+                    <BooksButtons />
+                    <BooksTableHeader />
+                    {!!store.books && store.books.map((book, index) => {
+                        return (
+                            <BooksTable key={index} book={book} />
+                        )
+                    })}
+                    <BooksModal show={store.show_modal} />
+                </>
     )
 }

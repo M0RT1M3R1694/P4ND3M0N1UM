@@ -2,15 +2,9 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 # import pytz
 
-import enum
 
 db = SQLAlchemy()
 
-class role(enum.Enum):
-    admin = "admin"
-
-class questions(enum.Enum):
-    pet = "What is the name of your first pet?"
 
 class User(db.Model):
 
@@ -20,6 +14,7 @@ class User(db.Model):
     last_name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(250), nullable=False)
+    role = db.Column(db.String(15), nullable=False)
     favorites = db.relationship("Favorites", backref='user', lazy=True)
 
     def __repr__(self):
@@ -33,8 +28,6 @@ class User(db.Model):
             "last_name": self.last_name,
             "email": self.email,
             "role": self.role,
-            "question_security": self.question_security,
-            "answer_security": self.answer_security
             # do not serialize the password, its a security breach
         }
 

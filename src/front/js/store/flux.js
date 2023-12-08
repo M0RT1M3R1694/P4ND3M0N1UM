@@ -2,6 +2,8 @@ import Swal from 'sweetalert2'
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			current_user: null,
+			auth: false,
 			username: null,
 			first_name: null,
 			last_name: null,
@@ -124,21 +126,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.clear();
 			},
 
-			get_all_users: async () => {
-
-				const token = localStorage.getItem('jwt-token')
-				const response = await fetch(process.env.BACKEND_URL + '/user', {
-					method: 'GET',
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-				setStore({ users: result.Users })
-				setStore({ users_search: result.Users })
-
-			},
 			get_user_by_id: async (user_id) => {
 				const token = localStorage.getItem('jwt-token')
 				setStore({ read_only_username: true })
@@ -153,6 +140,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				const result = await response.json()
 				setStore({ user_id: result.User })
+
+			},
+			isAuth: async () => {
+				const token = localStorage.getItem('jwt-token')
+
+				const response = await fetch(process.env.BACKEND_URL + "/isauth", {
+					method: 'GET',
+					headers: {
+						"Content-Type": "application/json",
+						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
+					}
+				})
+				const result = await response.json()
+				console.log(result)
+				if (response.ok){
+					setStore({ current_user: result })
+				 } else {
+					setStore({ current_user: false })
+				   }
 
 			},
 			add_user: async () => {
@@ -345,7 +351,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ show_modal: true })
 				setStore({ hidden_id: false })
 
-				const response = await fetch(process.env.BACKEND_URL + `/client/${book_id}`, {
+				const response = await fetch(process.env.BACKEND_URL + `/book/${book_id}`, {
 					method: 'GET',
 					headers: {
 						"Content-Type": "application/json",
@@ -425,7 +431,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					book.author = store.author
 				}
 
-				const response = await fetch(process.env.BACKEND_URL + `/client/${book_id}`, {
+				const response = await fetch(process.env.BACKEND_URL + `/book/${book_id}`, {
 					method: 'PUT',
 					body: JSON.stringify(book),
 					headers: {
@@ -493,7 +499,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ hidden_id: false })
 				setStore({ hidden_time_stamp: false })
 				setStore({ hidden_btn_new_code: true })
-				const response = await fetch(process.env.BACKEND_URL + `/job/${favorites_id}`, {
+				const response = await fetch(process.env.BACKEND_URL + `/favorites/${favorites_id}`, {
 					method: 'GET',
 					headers: {
 						"Content-Type": "application/json",
@@ -516,10 +522,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					favorites.type = store.type
 				}
 				if (store.model != null) {
-					job.model = store.model
+					favorites.model = store.model
 				}
 				if (store.book_id != null) {
-					favorites.id_client = store.book_id
+					favorites.id_book = store.book_id
 				}
 
 				const response = await fetch(process.env.BACKEND_URL + "/favorites", {
@@ -567,13 +573,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				let favorites = {}
 				if (store.type != null) {
-					job.type = store.type
+					favorites.type = store.type
 				}
 				if (store.brand != null) {
-					job.brand = store.brand
+					favorites.brand = store.brand
 				}
 				if (store.model != null) {
-					job.model = store.model
+					favorites.model = store.model
 				}
 				if (store.book_id != null) {
 					favorites.id_book = store.book_id

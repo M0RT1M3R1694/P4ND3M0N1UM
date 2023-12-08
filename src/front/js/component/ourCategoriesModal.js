@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Context } from '../store/appContext'
 import PropTypes from "prop-types";
 
-export const Favorites_sAdmiModal = (...props) => {
+export const OurCategoriesModal = (...props) => {
 
     const { store, actions } = useContext(Context)
 
@@ -14,18 +14,18 @@ export const Favorites_sAdmiModal = (...props) => {
     return (
         <form className='modal' id="exampleModal" tabIndex="-1" style={{ display: store.show_modal ? "inline-block" : "none" }} onSubmit={(e) => {
             e.preventDefault()
-            if (!!store.favorites_id) {
-                actions.update_favorites_by_id(store.favorites_id.id)
+            if (!!store.categories_id) {
+                actions.update_categories_by_id(store.favorites_id.id)
                 e.target.reset()
             } else {
-                actions.add_favorites()
+                actions.add_categories()
                 e.target.reset()
             }
         }}>
             <div className="modal-dialog modal-dialog-centered p-1 fs-5">
                 <div className="modal-content favorites_sModalContent p-2">
                     <div className="modal-header">
-                        <h5 className="modal-title fw-bold fs-5">F4V0R1T3S</h5>
+                        <h5 className="modal-title fw-bold fs-5">C4T3G0R13S</h5>
                         <button type="reset" className="close btn btn-login fw-bold text-center fw-bold fs-5"
                             onClick={() => { actions.handle_delete_modal() }}>
                             <i className="fa-solid fa-xmark"></i>
@@ -34,7 +34,7 @@ export const Favorites_sAdmiModal = (...props) => {
                     <div className="modal-body">
                         <div className="form-group mb-2">
                             <label htmlFor="userId" className="modal-label-input"
-                                hidden={store.hidden_id} > XXX {!!store.favorites_id ? store.favorites_id.id : ""}
+                                hidden={store.hidden_id} > XXX {!!store.favorites_id ? store.categories_id.id : ""}
                             </label>
                         </div>
                         <div className="form-group mb-2">
@@ -43,23 +43,23 @@ export const Favorites_sAdmiModal = (...props) => {
                                 <select className="form-select select-favorites_s-modal" id="inputGroupTypes" onChange={actions.handle_change} name='type'>
                                     <option className='option-favorites-modal' defaultValue="null">Select the type</option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.favorites_id.type == "horror" ? true : false}
+                                        selected={!!store.favorites_id && store.categories_id.type == "horror" ? true : false}
                                         value="horror" >Horror
                                     </option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.favorites_id.type == "comedy" ? true : false}
+                                        selected={!!store.favorites_id && store.categories_id.type == "comedy" ? true : false}
                                         value="comedy">Thriller
                                     </option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.favorites_id.type == "poetry" ? true : false}
+                                        selected={!!store.favorites_id && store.categories_id.type == "poetry" ? true : false}
                                         value="poetry">Mystery
                                     </option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.favorites_id.type == "fantasy" ? true : false}
+                                        selected={!!store.favorites_id && store.categories_id.type == "fantasy" ? true : false}
                                         value="fantasy">Fantasy
                                     </option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.favorites_id.type == "sci-fy" ? true : false}
+                                        selected={!!store.favorites_id && store.categories_id.type == "sci-fy" ? true : false}
                                         value="sci-fy">Sci-fy
                                     </option>
                                 </select>
@@ -75,7 +75,7 @@ export const Favorites_sAdmiModal = (...props) => {
                                         return (
                                             <option key={index}
                                                 className='option-favorites-modal'
-                                                selected={!!store.favorites_id && store.favorites_id.book.id == book.id ? true : false}
+                                                selected={!!store.favorites_id && store.categories_id.book.id == book.id ? true : false}
                                                 value={book.id}>{book.id} - {book.description} {book.author}
                                             </option>
                                         )
@@ -120,10 +120,10 @@ export const Favorites_sAdmiModal = (...props) => {
         </form>
     )
 }
-Favorites_sAdmiModal.propTypes = {
+OurCategoriesModal.propTypes = {
     show: PropTypes.bool
 }
-Favorites_sAdmiModal.defaultProps = {
+OurCategoriesModal.defaultProps = {
     show: false
 }
 

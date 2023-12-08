@@ -21,11 +21,7 @@ export const UsersTable = ({ user }, ...props) => {
                             <th scope="row" className="text-center users-cell-size align-middle fs-5">{user.id}</th>
                             <td className="text-center users-cell-size align-middle fs-5">{user.first_name}</td>
                             <td className="text-center users-cell-size align-middle fs-5">{user.last_name}</td>
-                            <td className="text-center users-cell-size align-middle fs-5">{user.role}</td>
                             <td className="text-center users-cell-size align-middle">
-                              <button className="btn btn-login text-center" onClick={() => actions.get_user_by_id(user.id)}>
-                                <i className="fa-solid fa-circle-info me-2"></i>View Details
-                              </button>
                             </td>
                           </tr>
                         </tbody>
