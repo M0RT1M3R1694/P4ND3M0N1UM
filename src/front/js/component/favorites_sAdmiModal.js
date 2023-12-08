@@ -6,10 +6,10 @@ export const Favorites_sAdmiModal = (...props) => {
 
     const { store, actions } = useContext(Context)
 
-    useEffect(() => {
-        actions.get_all_books()
-        actions.get_all_users()
-    }, [])
+    // useEffect(() => {
+    //     actions.get_all_books()
+    //     actions.get_all_users()
+    // }, [])
 
     return (
         <form className='modal' id="exampleModal" tabIndex="-1" style={{ display: store.show_modal ? "inline-block" : "none" }} onSubmit={(e) => {

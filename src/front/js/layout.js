@@ -10,7 +10,6 @@ import { Books } from "./pages/books";
 import Login from "./pages/login";
 import ForgotPass from "./pages/forgotPass";
 import OurCategories from "./pages/ourCategories";
-import ChangePass from "./pages/changePass";
 import { Users } from "./pages/users";
 import { Favorites_sAdmi } from "./pages/favorites_sAdmi";
 import BackToTopBtn from "./component/backToTopBtn";
@@ -38,8 +37,8 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<Favorites_sAdmi />} path="/favorites_sadmi" />
                         <Route element={<Books />} path="/books" />
+                        <Route element={<OurCategories />} path="/ourCategories" />
                         <Route element={<Users />} path="/users" />
-                        <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
                 </ScrollToTop>

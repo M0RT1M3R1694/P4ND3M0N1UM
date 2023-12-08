@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import '../../styles/ourCategories.css'
 import { OurCategoriesButtons } from '../component/ourCategoriesButtons'
 import { OurCategoriesTableHeader } from '../component/ourCategoriesTableHeader';
@@ -11,8 +11,8 @@ export const OurCategories = () => {
     const { store, actions } = useContext(Context)
 
     // useEffect(() => {
-    //     actions.get_all_favorites_s()
-    // }, [store.show_modal, store.favorites_sdeleted])
+    //     actions.get_all_ourCategories()
+    // }, [store.show_modal,])
 
     return (
         store.current_user == null ? <h1>Loading...</h1> :
@@ -32,6 +32,7 @@ export const OurCategories = () => {
     )
 }
 
+export default OurCategories
 
 // const OurCategories = () => {
 
@@ -104,4 +105,3 @@ export const OurCategories = () => {
 //     )
 // }
 
-// export default OurCategories

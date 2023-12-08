@@ -6,16 +6,16 @@ export const OurCategoriesModal = (...props) => {
 
     const { store, actions } = useContext(Context)
 
-    useEffect(() => {
-        actions.get_all_books()
-        actions.get_all_users()
-    }, [])
+    // useEffect(() => {
+    //     actions.get_all_books()
+    //     actions.get_all_users()
+    // }, [])
 
     return (
         <form className='modal' id="exampleModal" tabIndex="-1" style={{ display: store.show_modal ? "inline-block" : "none" }} onSubmit={(e) => {
             e.preventDefault()
             if (!!store.categories_id) {
-                actions.update_categories_by_id(store.favorites_id.id)
+                actions.update_categories_by_id(store.categories_id.id)
                 e.target.reset()
             } else {
                 actions.add_categories()
@@ -34,7 +34,7 @@ export const OurCategoriesModal = (...props) => {
                     <div className="modal-body">
                         <div className="form-group mb-2">
                             <label htmlFor="userId" className="modal-label-input"
-                                hidden={store.hidden_id} > XXX {!!store.favorites_id ? store.categories_id.id : ""}
+                                hidden={store.hidden_id} > XXX {!!store.categories_id ? store.categories_id.id : ""}
                             </label>
                         </div>
                         <div className="form-group mb-2">
@@ -43,23 +43,23 @@ export const OurCategoriesModal = (...props) => {
                                 <select className="form-select select-favorites_s-modal" id="inputGroupTypes" onChange={actions.handle_change} name='type'>
                                     <option className='option-favorites-modal' defaultValue="null">Select the type</option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.categories_id.type == "horror" ? true : false}
+                                        selected={!!store.categories_id && store.categories_id.type == "horror" ? true : false}
                                         value="horror" >Horror
                                     </option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.categories_id.type == "comedy" ? true : false}
+                                        selected={!!store.categories_id && store.categories_id.type == "comedy" ? true : false}
                                         value="comedy">Thriller
                                     </option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.categories_id.type == "poetry" ? true : false}
+                                        selected={!!store.categories_id && store.categories_id.type == "poetry" ? true : false}
                                         value="poetry">Mystery
                                     </option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.categories_id.type == "fantasy" ? true : false}
+                                        selected={!!store.categories_id && store.categories_id.type == "fantasy" ? true : false}
                                         value="fantasy">Fantasy
                                     </option>
                                     <option className='option-favorites-modal'
-                                        selected={!!store.favorites_id && store.categories_id.type == "sci-fy" ? true : false}
+                                        selected={!!store.categories_id && store.categories_id.type == "sci-fy" ? true : false}
                                         value="sci-fy">Sci-fy
                                     </option>
                                 </select>
@@ -75,7 +75,7 @@ export const OurCategoriesModal = (...props) => {
                                         return (
                                             <option key={index}
                                                 className='option-favorites-modal'
-                                                selected={!!store.favorites_id && store.categories_id.book.id == book.id ? true : false}
+                                                selected={!!store.book_id && store.book_id.book.id == book.id ? true : false}
                                                 value={book.id}>{book.id} - {book.description} {book.author}
                                             </option>
                                         )
@@ -92,13 +92,13 @@ export const OurCategoriesModal = (...props) => {
                                 id="comments"
                                 name="comments"
                                 onChange={actions.handle_change}
-                                defaultValue={!!store.favorites_id ? store.favorites_id.comments : ""}
+                                defaultValue={!!store.categories_id ? store.categories_id.comments : ""}
                             />
                         </div>
                         <div className="form-group mb-2">
                             <label htmlFor="time_stamp" className="modal-label-input" hidden={store.hidden_time_stamp}>
                                 <i className="fa-regular fa-clock me-1">
-                                </i>Time Stamp: {!!store.favorites_id ? new Dates(store.favorites_id.time_stamp).toLocaleString() : ""}
+                                </i>Time Stamp: {!!store.categories_id ? new Dates(store.categories_id.time_stamp).toLocaleString() : ""}
                             </label>
                         </div>
                     </div>

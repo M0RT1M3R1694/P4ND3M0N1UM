@@ -17,7 +17,7 @@ export const OurCategoriesButtons = () => {
                                     <input type="text" id="inputFavoritesSearch" className="form-control formControlFavoritesSearchButton"
                                         autoComplete="off" aria-describedby="passwordHelpInline" placeholder="Search by Data"
                                         onKeyUp={(e) => {
-                                            actions.search_favorites(e.target.value)
+                                            actions.search_categories(e.target.value)
                                         }} />
                                     <i className="fa-solid fa-magnifying-glass me-2"></i>
                                 </div>

@@ -22,6 +22,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			books_search: [],
 			book_id: null,
 
+			ourCategories: [],
+			ourCategories_search: [],
+			categories_id: null,
+
 			user_login: JSON.parse(localStorage.getItem("user_login")) == undefined ? {} : JSON.parse(localStorage.getItem("user_login")),
 			is_logued: false,
 
@@ -34,8 +38,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				users: JSON.parse(localStorage.getItem("btnUsers")) == undefined ? true : JSON.parse(localStorage.getItem("btnUsers")),
 				books: JSON.parse(localStorage.getItem("btnBooks")) == undefined ? true : JSON.parse(localStorage.getItem("btnBooks")),
 				favorites_s_admin: JSON.parse(localStorage.getItem("btnFavorites_sAdmin")) == undefined ? true : JSON.parse(localStorage.getItem("btnFavorites_sAdmin")),
-				login: JSON.parse(localStorage.getItem("btnLogin")) == undefined ? false : JSON.parse(localStorage.getItem("btnLogin")),
-				account: JSON.parse(localStorage.getItem("btnAccount")) == undefined ? true : JSON.parse(localStorage.getItem("btnAccount"))
 			},
 
 		},
@@ -67,6 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					const result = await response.json()
+					console.log(result)
 
 					if (result.msg == "ok") {
 						Swal.fire({
@@ -80,12 +83,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							timer: 3000
 						})
 						localStorage.setItem("jwt-token", result.access_token);
-						localStorage.setItem("user_login", JSON.stringify(result.User))
-						setStore({ user_login: result.User })
-						// actions.active_buttons_by_role()
-						setStore({ is_logued: true })
-						actions.clear_store()
-
+						setStore({ current_user: result.user })
+						return true
 					} else {
 						Swal.fire({
 							position: 'top-end',
@@ -101,19 +100,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				} catch (error) {
 					console.log(error + " Error in login_user backEnd")
-					setStore({ is_logued: false })
+					setStore({ current_user: false })
 				}
 			},
 			logout: () => {
-				setStore({ is_logued: false })
-				setStore({
-					buttons_admin_tech: {
-						users: true, favorites_s_admin: true,
-						books: true, login: false, account: true
-					}
-				})
-				setStore({ user_login: {} })
-				localStorage.clear();
+				setStore({ current_user: false })
+				localStorage.removeItem("jwt-token");
 			},
 			isAuth: async () => {
 				const token = localStorage.getItem('jwt-token')

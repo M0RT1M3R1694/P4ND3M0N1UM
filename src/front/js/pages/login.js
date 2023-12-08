@@ -9,8 +9,8 @@ const Login = () => {
     const navigate = useNavigate()
 
     useEffect(()=>{
-        store.is_logued ? navigate('/') : null
-    },[store.is_logued])
+        store.current_user ? navigate('/') : null
+    },[store.current_user])
 
     return (
         <div className='container-login my-5 ' >
@@ -19,7 +19,10 @@ const Login = () => {
 
             <form className="form-login mt-3" onSubmit={e => {
                 e.preventDefault()
-                actions.login_user()
+               const res = actions.login_user()
+               if (res == true){
+                navigate("/")
+               }
             }
             }>
                 <input

@@ -9,7 +9,7 @@ from flask_jwt_extended import create_access_token, get_jwt_identity,jwt_require
 
 api = Blueprint('api', __name__)
 
-
+# <----------------- login ----------------------->
 @api.route('/login', methods=['POST'])
 def addLogin():
     request_body = request.get_json(force=True, silent=True)
@@ -32,11 +32,40 @@ def addLogin():
 
     response_body = {
         "msg": "ok",
-        "User": user_data.serialize()
+        "User": user_data.serialize(),
+        "access_token": access_token
     }
 
     return jsonify(response_body), 200
 
+# <----------------- logout ----------------------->
+@api.route('/logout', methods=['POST'])
+def addLogin():
+    request_body = request.get_json(force=True, silent=True)
+
+    if "username" not in request_body or request_body["username"] == "":
+        raise APIException("The username is required", status_code=404)
+
+    if "password" not in request_body or request_body["password"] == "":
+        raise APIException("The password is required", status_code=404)
+
+    user_data = User.query.filter_by(username=request_body['username']).first()
+
+    if user_data is None:
+        raise APIException("The username is incorrect", status_code=404)
+
+    if current_app.bcrypt.check_password_hash(user_data.password, request_body['password']) is False:
+        raise APIException('The password is incorrect', 401)
+
+    access_token = create_access_token(identity=request_body['username'])
+
+    response_body = {
+        "msg": "ok",
+        "User": user_data.serialize(),
+        "access_token": access_token
+    }
+
+    return jsonify(response_body), 200
 
 # <----------------- User ----------------------->
 
@@ -86,10 +115,7 @@ def getBooks():
 
     if user is None:
         raise APIException("Book not found", status_code=404)
-    
-    if user.role.value != "admin":
-        raise APIException("Access denied", status_code=403)
-
+   
     book = Book.query.all()
     
     if book is None:
@@ -113,10 +139,7 @@ def getBook(book_id):
     user = User.query.filter_by(username=current_user).first()
 
     if user is None:
-        raise APIException("User not found", status_code=404)
-
-    if user.role.value != "admin":
-        raise APIException("Access denied", status_code=403)    
+        raise APIException("User not found", status_code=404)   
     
     book = Book.query.get(book_id)
 

@@ -44,9 +44,12 @@ export const Navbar = () => {
 							</Link>
 						</li>
 						<li className="nav-item ms-3 me-2 mt-2" hidden={store.buttons_admin_tech.account}>
-							<Link to="/" className="text-decoration-none" >
-								<button className="btn btn-login" onClick={() => actions.logout()}><i className="fa-solid fa-right-from-bracket ms-auto text-white"></i>Logout</button>
+							<Link to="/login" className="text-decoration-none" >
+								<button className="btn btn-login"><i className="fa-regular fa-user me-2"></i>L0GUT</button>
 							</Link>
+							{/* <Link to="/" className="text-decoration-none" >
+								<button className="btn btn-login" onClick={() => actions.logout()}><i className="fa-solid fa-right-from-bracket ms-auto text-white"></i>Logout</button>
+							</Link> */}
 						</li>
 					</ul>
 				</div>
