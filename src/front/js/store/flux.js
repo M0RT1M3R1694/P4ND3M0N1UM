@@ -17,8 +17,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			users: [],
 			users_search: [],
 			user_id: null,
-			read_only_username: true,
-			user_deleted: false,
 
 			books: [],
 			books_search: [],
@@ -27,13 +25,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user_login: JSON.parse(localStorage.getItem("user_login")) == undefined ? {} : JSON.parse(localStorage.getItem("user_login")),
 			user_question: {},
 			is_logued: false,
-
-			hidden_username: null,
-			hidden_questions_answer: null,
-			hidden_id: null,
-			hidden_time_stamp: null,
-			hidden_input_question_answer: true,
-			hidden_btn_new_code: null,
 
 			correct_answer: false,
 			password_changed: false,
@@ -125,23 +116,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ user_login: {} })
 				localStorage.clear();
 			},
-
-			get_user_by_id: async (user_id) => {
-				const token = localStorage.getItem('jwt-token')
-				setStore({ read_only_username: true })
-				setStore({ hidden_id: false })
-				setStore({ show_modal: true })
-				const response = await fetch(process.env.BACKEND_URL + `/user/${user_id}`, {
-					method: 'GET',
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-				setStore({ user_id: result.User })
-
-			},
 			isAuth: async () => {
 				const token = localStorage.getItem('jwt-token')
 
@@ -219,94 +193,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-			update_user_by_id: async (user_id) => {
-				const token = localStorage.getItem('jwt-token')
-				const store = getStore()
-				const actions = getActions()
-				setStore({ hidden_input_question_answer: true })
-				let user = {}
-				if (store.first_name != null) {
-					user.first_name = store.first_name
-				}
-				if (store.last_name != null) {
-					user.last_name = store.last_name
-				}
-				if (store.password != null) {
-					user.password = store.password
-				}
-
-				const response = await fetch(process.env.BACKEND_URL + `/user/${user_id}`, {
-					method: 'PUT',
-					body: JSON.stringify(user),
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token
-					}
-				})
-				const result = await response.json()
-				if (result.msg == "ok") {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'success',
-						title: 'Done',
-						text: "The user " + store.user_id.username + " was updated",
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-					actions.handle_delete_modal()
-					actions.clear_store()
-				}
-				else {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'error',
-						title: 'Opppsss',
-						text: result.message,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-
-				}
-
-			},
-			delete_user_by_id: async (user_id) => {
-				const token = localStorage.getItem('jwt-token')
-				const response = await fetch(process.env.BACKEND_URL + `/user/${user_id.id}`, {
-					method: 'DELETE',
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-				if (result.msg == "ok") {
-					setStore({ user_deleted: true })
-					Swal.fire({
-						title: 'Deleted!',
-						text: `The user ${user_id.first_name} ${user_id.last_name} was deleted`,
-						icon: 'success',
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 2000
-					})
-				} else {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'error',
-						title: 'Opppsss',
-						text: result.message,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-				}
-			},
 			search_users: (input) => {
 				const store = getStore();
 
@@ -318,9 +204,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 				setStore({ users: newUser })
-			},
-			delete_user_change: () => {
-				setStore({ user_deleted: false })
 			},
             add_favorites: (selectedItem) => {
 				let listOfFavorites = getStore().favorites;
@@ -345,22 +228,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const result = await response.json()
 				setStore({ books: result.books })
 				setStore({ books_search: result.books })
-			},
-			get_book_by_id: async (book_id) => {
-				const token = localStorage.getItem('jwt-token')
-				setStore({ show_modal: true })
-				setStore({ hidden_id: false })
-
-				const response = await fetch(process.env.BACKEND_URL + `/book/${book_id}`, {
-					method: 'GET',
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-				setStore({ book_id: result.Book })
-
 			},
 			add_book: async () => {
 				const token = localStorage.getItem('jwt-token')
