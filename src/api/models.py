@@ -27,7 +27,6 @@ class User(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "email": self.email,
-            "role": self.role,
             # do not serialize the password, its a security breach
         }
 
@@ -52,7 +51,7 @@ class Book (db.Model):
     author = db.Column(db.String(80), nullable=False)
     category = db.Column(db.String(80), nullable=False)
     favorites = db.relationship("Favorites", backref='book', lazy=True)
-    category = db.relationship("Category", backref='book', lazy=True)
+    categories = db.relationship("Categories", backref='book', lazy=True)
 
     def __repr__(self):
         return f'<Book {self.name}>'
@@ -79,13 +78,13 @@ class Book (db.Model):
         db.session.commit()
 
 
-class Category (db.Model):
+class Categories (db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     id_book = db.Column(db.Integer, db.ForeignKey(Book.id))
     def __repr__(self):
-        return f'<Category {self.name}>'
+        return f'<Categories {self.name}>'
 
     def serialize(self):
         return {
@@ -106,7 +105,7 @@ class Category (db.Model):
         db.session.commit()
 
 
-class Favorites(db.Model):
+class Favorites (db.Model):
     id = db.Column(db.Integer, primary_key=(True))
     id_book = db.Column(db.Integer, db.ForeignKey(Book.id))
     id_user = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)

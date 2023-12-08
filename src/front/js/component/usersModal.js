@@ -9,11 +9,11 @@ export const UsersModal = (...props) => {
     return (
         <form className='modal' tabIndex="-1" style={{ display: store.show_modal ? "inline-block" : "none" }} onSubmit={(e) => {
             e.preventDefault()
-            if (!!store.user_id) {
+            if (!!store.users_id) {
                 actions.update_user_by_id(store.user_id.id)
                 e.target.reset()
             } else {
-                actions.add_user()
+                actions.add_users()
                 e.target.reset()
             }
         }}>
