@@ -23,7 +23,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			book_id: null,
 
 			user_login: JSON.parse(localStorage.getItem("user_login")) == undefined ? {} : JSON.parse(localStorage.getItem("user_login")),
-			user_question: {},
 			is_logued: false,
 
 			correct_answer: false,
@@ -73,8 +72,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Swal.fire({
 							position: 'top-end',
 							icon: 'success',
-							title: 'Good',
-							text: `Welcome ${result.User.first_name} ${result.User.last_name}`,
+							title: 'G00D',
+							text: `W3LC0M3 ${result.User.first_name} ${result.User.last_name}`,
 							showConfirmButton: false,
 							color: '#FFFFFF',
 							background: '#41206C',
@@ -132,66 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ current_user: result })
 				 } else {
 					setStore({ current_user: false })
-				   }
-
-			},
-			add_user: async () => {
-				const token = localStorage.getItem('jwt-token')
-				setStore({ hidden_input_question_answer: false })
-				setStore({ read_only_username: false })
-				const store = getStore()
-				const actions = getActions()
-
-				let user = {}
-				if (store.username != null) {
-					user.username = store.username
-				}
-				if (store.first_name != null) {
-					user.first_name = store.first_name
-				}
-				if (store.last_name != null) {
-					user.last_name = store.last_name
-				}
-				if (store.password != null) {
-					user.password = store.password
-				}
-				const response = await fetch(process.env.BACKEND_URL + '/user', {
-					method: 'POST',
-					body: JSON.stringify(user),
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-
-				if (result.msg == "ok") {
-					actions.handle_delete_modal()
-					Swal.fire({
-						position: 'top-end',
-						icon: 'success',
-						title: 'Add',
-						text: `The User ${result.User.first_name} ${result.User.last_name} was added`,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-					actions.clear_store()
-
-				} else {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'error',
-						title: 'Opppsss',
-						text: result.message,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-				}
-
+				 }
 			},
 			search_users: (input) => {
 				const store = getStore();
@@ -282,58 +222,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-			update_book_by_id: async (book_id) => {
-				const token = localStorage.getItem('jwt-token')
-				const store = getStore()
-				const actions = getActions()
-
-				let book = {}
-				if (store.name != null) {
-					book.name = store.name
-				}
-				if (store.description != null) {
-					book.description = store.description
-				}
-				if (store.author != null) {
-					book.author = store.author
-				}
-
-				const response = await fetch(process.env.BACKEND_URL + `/book/${book_id}`, {
-					method: 'PUT',
-					body: JSON.stringify(book),
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-				if (result.msg == "ok") {
-					actions.handle_delete_modal()
-					Swal.fire({
-						position: 'top-end',
-						icon: 'success',
-						title: 'Done',
-						text: `The book ${store.book_id.name} ${store.book_id.description} was updated`,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-					actions.clear_store()
-
-				} else {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'error',
-						title: 'Opppsss',
-						text: result.message,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-				}
-			},
 			search_books: (input) => {
 				const store = getStore()
 				const newBook = store.books_search.filter(book => {
@@ -359,22 +247,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const result = await response.json()
 				setStore({ favorites_s: result.Favorites_s })
 				setStore({ favorites_s_search: result.Favorites_s })
-			},
-			get_favorites_by_id: async (favorites_id) => {
-				const token = localStorage.getItem('jwt-token')
-				setStore({ show_modal: true })
-				setStore({ hidden_id: false })
-				setStore({ hidden_time_stamp: false })
-				setStore({ hidden_btn_new_code: true })
-				const response = await fetch(process.env.BACKEND_URL + `/favorites/${favorites_id}`, {
-					method: 'GET',
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-				setStore({ favorites_id: result.Favorites })
 			},
 			add_favorites: async () => {
 				const token = localStorage.getItem('jwt-token')
@@ -433,62 +305,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				}
 			},
-			update_favorites_by_id: async (favorites_id) => {
-				const token = localStorage.getItem('jwt-token')
-				const store = getStore()
-				const actions = getActions()
-
-				let favorites = {}
-				if (store.type != null) {
-					favorites.type = store.type
-				}
-				if (store.brand != null) {
-					favorites.brand = store.brand
-				}
-				if (store.model != null) {
-					favorites.model = store.model
-				}
-				if (store.book_id != null) {
-					favorites.id_book = store.book_id
-				}
-
-				const response = await fetch(process.env.BACKEND_URL + `/favorites/${favorites_id}`, {
-					method: 'PUT',
-					body: JSON.stringify(favorites),
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-				if (result.msg == "ok") {
-					actions.handle_delete_modal()
-					Swal.fire({
-						position: 'top-end',
-						icon: 'success',
-						title: 'Update',
-						text: `The Favorites ${result.Favorites.code} was updated`,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-					actions.clear_store()
-
-				} else {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'error',
-						title: 'Opppsss',
-						text: result.message,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-				}
-
-			},
 			search_favoritess: (input) => {
 				const store = getStore();
 
@@ -506,7 +322,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const actions = getActions()
 				setStore({ show_modal: true })
 				if (!!store.user_id != true) {
-					setStore({ hidden_input_question_answer: false })
 					setStore({ read_only_username: false })
 					setStore({ hidden_id: true })
 				}
@@ -567,18 +382,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				}
 			},
-
-			clear_store: () => {
-
-				setStore({ username: null })
-				setStore({ first_name: null })
-				setStore({ last_name: null })
-				setStore({ password: null })
-
-				setStore({ type: null })
-				setStore({ book_id: null })
-			},
-
 			handle_change: (e) => {
 				setStore({ [e.target.name]: e.target.value })
 			},
