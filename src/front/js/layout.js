@@ -8,7 +8,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Books } from "./pages/books";
 import Login from "./pages/login";
-import ForgotPass from "./pages/fotgotPass";
+import ForgotPass from "./pages/forgotPass";
 import OurCategories from "./pages/ourCategories";
 import ChangePass from "./pages/changePass";
 import { Users } from "./pages/users";
