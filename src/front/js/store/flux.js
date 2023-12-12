@@ -82,9 +82,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 							background: '#41206C',
 							timer: 3000
 						})
+
 						localStorage.setItem("jwt-token", result.access_token);
 						setStore({ current_user: result.user })
 						return true
+
 					} else {
 						Swal.fire({
 							position: 'top-end',
