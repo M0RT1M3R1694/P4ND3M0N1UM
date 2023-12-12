@@ -1,5 +1,5 @@
 .container-forgot {
-    background: url(https://media.istockphoto.com/id/1399980043/photo/technology-innovation-modern-futuristic-background.webp?b=1&s=170667a&w=0&k=20&c=d_SCKLxnRYJIq_k7IfnAr3o63bySvnfBYu3e84yFMyg=);
+    background: url(https://as1.ftcdn.net/v2/jpg/04/97/71/66/1000_F_497716629_EFllflEBY5dmMlMNnaSEN4uf4UgLUzKx.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     margin: auto;
@@ -9,7 +9,7 @@
     flex-direction: column;
     align-items: center;
     width: fit-content;
-    padding: 3rem;
+    padding: 5rem;
   }
   
   .lh1 {
@@ -24,10 +24,10 @@
     margin: 0 auto;
     color: white;
   }
-  .logo1 {
-    width: 12rem;
-    height: 10.5rem;
-  }
+  /* .logo1 {
+    width: 30rem;
+    height: 20rem;
+  } */
   
   .formControlForgotPassword {
     width: Hug (130px);
@@ -56,7 +56,7 @@
   
   .option-forgot-pass {
     color: white;
-    background: #41206C;
+    background: #ff02c4;
   }
   
   .btnforgot {

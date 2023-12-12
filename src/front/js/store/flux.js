@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			is_logued: false,
 
 			correct_answer: false,
-			password_changed: false,
+			// password_changed: false,
 
 			show_modal: false,
 
@@ -110,7 +110,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isAuth: async () => {
 				const token = localStorage.getItem('jwt-token')
 
-				const response = await fetch(process.env.BACKEND_URL + "/isauth", {
+				const response = await fetch(process.env.BACKEND_URL + "/isAuth", {
 					method: 'GET',
 					headers: {
 						"Content-Type": "application/json",

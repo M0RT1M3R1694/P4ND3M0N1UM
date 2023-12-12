@@ -67,7 +67,7 @@ h3.title-home {
     font-weight: 600;
     line-height: 120%;
     text-transform: capitalize;
-    background: var(--gradient-2, linear-gradient(129deg, #22B5BE 0%, #6743CC 100%));
+    background: var(--gradient-2, linear-gradient(129deg, #b400a5 0%, #b400a5 100%));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -76,7 +76,7 @@ h3.title-home {
 }
 
 h6.subtitles-home {
-    color: rgb(255, 255, 255);
+    color: rgb(193, 0, 252);
     font-size: 2rem;
     font-style: normal;
     font-weight: 400;

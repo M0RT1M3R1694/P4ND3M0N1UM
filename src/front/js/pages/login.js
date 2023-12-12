@@ -44,7 +44,7 @@ const Login = () => {
 
                 <div className='text-end me-2'>
                     <Link to="/forgotPass" className='form-label' onClick={() => actions.reset_hidden_username_question(false, true)}>
-                        <span className='span-forgot text-white ms-auto'>Forgot password?</span>
+                        <span className='span-forgot text-white ms-auto'>F0RG0T P4SSW0RD?</span>
                     </Link>
                 </div>
 
@@ -52,7 +52,7 @@ const Login = () => {
 
                 <div className='text-center'>
 
-                    <button className='btnLogin btn'>Login</button>
+                    <button className='btnLogin btn'>L0G1N</button>
 
                 </div>
             </form>

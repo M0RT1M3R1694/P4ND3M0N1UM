@@ -28,10 +28,10 @@ const ForgotPass = () => {
                     onChange={actions.handle_change}
                 />
                 <div className='text-center'>
-                    <button className='btnforgot btn mb-2 me-2'>Check</button>
-                    <Link to="/login">
-                        <button className='btnforgot btn '>Cancel</button>
-                    </Link>
+                    <button className='btnforgot btn mb-2 me-2'>CH3CK</button>
+                    {/* <Link to="/login">
+                        <button className='btnforgot btn '>C4NC3L</button>
+                    </Link> */}
                 </div>
             </form>
             <form className=" forgot mt-3" hidden={store.hidden_questions_answer} onSubmit={(e) => {
@@ -39,25 +39,25 @@ const ForgotPass = () => {
                 actions.check_question_answer()
             }}>
                 {/*Dop */}
-                <div className="input-group group-forgot-pass mb-3 input-select">
+                {/* <div className="input-group group-forgot-pass mb-3 input-select">
                     <select className="form-select select-forgot-pass" id="inputGroupQuestions" onChange={actions.handle_change} name='question_security'>
                         <option className='option-forgot-pass' defaultValue="null">Select the question</option>
                     </select>
-                </div>
+                </div> */}
 
                 {/* Respuesta */}
-                <input
+                {/* <input
                     className='form-control formControlForgotPassword mb-3'
                     type='text'
                     placeholder='Answer'
                     name='answer_security'
                     onChange={actions.handle_change}
-                />
+                /> */}
 
                 <div className='text-center'>
-                    <button className='btnforgot btn'>Continue</button>
+                    <button className='btnforgot btn'>C0NT1NU3</button>
                     <Link to="/login">
-                        <button className='btnforgot btn ms-2'>Cancel</button>
+                        <button className='btnforgot btn ms-2'>C4NC3L</button>
                     </Link>
                 </div>
 
