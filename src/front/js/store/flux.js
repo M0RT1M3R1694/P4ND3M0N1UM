@@ -26,11 +26,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			ourCategories_search: [],
 			categories_id: null,
 
-			user_login: JSON.parse(localStorage.getItem("user_login")) == undefined ? {} : JSON.parse(localStorage.getItem("user_login")),
-			is_logued: false,
+			login_user: JSON.parse(localStorage.getItem("login_user")) == undefined ? {} : JSON.parse(localStorage.getItem("login_user")),
+			current_user: false,
 
 			correct_answer: false,
-			// password_changed: false,
+			password_changed: false,
 
 			show_modal: false,
 

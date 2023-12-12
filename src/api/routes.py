@@ -11,7 +11,7 @@ api = Blueprint('api', __name__)
 
 # <----------------- login ----------------------->
 @api.route('/login', methods=['POST'])
-def addLogin():
+def addlogin():
     request_body = request.get_json(force=True, silent=True)
 
     if "username" not in request_body or request_body["username"] == "":
@@ -39,8 +39,8 @@ def addLogin():
     return jsonify(response_body), 200
 
 # <----------------- logout ----------------------->
-@api.route('/logout', methods=['POST'])
-def addLogin():
+@api.route('/islogout', methods=['POST'])
+def is_logout():
     request_body = request.get_json(force=True, silent=True)
 
     if "username" not in request_body or request_body["username"] == "":
@@ -57,12 +57,9 @@ def addLogin():
     if current_app.bcrypt.check_password_hash(user_data.password, request_body['password']) is False:
         raise APIException('The password is incorrect', 401)
 
-    access_token = create_access_token(identity=request_body['username'])
 
     response_body = {
         "msg": "ok",
-        "User": user_data.serialize(),
-        "access_token": access_token
     }
 
     return jsonify(response_body), 200
@@ -271,10 +268,10 @@ def deletefavorites(favorites_id):
     if user is None:
         raise APIException("User not found", status_code=404)
 
-    if favorites is None:
+    if favorites_id is None:
         raise APIException("Favorites not found", status_code=404)
 
-    favorites.delete()
+    favorites_id.delete()
 
     response_body = {
         "msg": "ok"
