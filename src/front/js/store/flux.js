@@ -48,9 +48,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const actions = getActions()
 				try {
 					let user = {}
-					if (store.username == null) {
+					if (store.username === null) {
 						user = null
-					} else if (store.password == null) {
+					} else if (store.password === null) {
 						user = {
 							username: store.username
 						}
@@ -139,8 +139,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				setStore({ users: newUser })
 			},
-            add_favorites: (selectedItem) => {
-				let listOfFavorites = getStore().favorites;
+            add_user: (selectedItem) => {
+				let listOfFavorites = getStore().user;
 				if (!listOfFavorites.includes(selectedItem)) {
 					setStore({ favorites: listOfFavorites.concat(selectedItem) });
 				}
@@ -216,6 +216,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
+			 fetchUsers: async () => {
+				try {
+				  const response = await fetch(process.env.BACKEND_URL + "/user", {
+					method: 'GET',
+					headers: {
+					  'Content-Type': 'application/json',
+					  'Authorization': 'Bearer ' + localStorage.getItem('jwt-token') // Si es necesario, incluye el token de autorización
+					}
+				  });
+			  
+				  const result = await response.json();
+			  
+				  if (response.ok && result.msg === "ok") {
+					// Puedes realizar alguna acción con los usuarios obtenidos
+					setStore({ users: result.Users });
+				  } else {
+					// Manejo de error si la solicitud no fue exitosa
+					console.error(result.message || 'Error fetching users');
+				  }
+				} catch (error) {
+				  // Manejo de error en caso de una excepción durante la solicitud
+				  console.error('Error fetching users:', error.message);
+				}
+			  },
 			search_books: (input) => {
 				const store = getStore()
 				const newBook = store.books_search.filter(book => {
