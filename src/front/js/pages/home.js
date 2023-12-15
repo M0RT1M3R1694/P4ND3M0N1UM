@@ -9,9 +9,9 @@ export const Home = () => {
 		<div>
 			<header className="header-Home">
 				<section className="titles-header">
-					<h1>WELCOME TO HELL</h1><br>
+					<h1>W3LC0M3 T0 H3LL</h1><br>
 					</br>
-					<h1>WILLKOMMEN IN DER HÖLLE</h1><br>
+					<h1>W1LLK0MM32N 1N D3R HÖLL3</h1><br>
 					</br>
 					<h1>ДОБРО ПОЖАЛОВАТЬ В (АД </h1>
 				</section>
@@ -23,7 +23,7 @@ export const Home = () => {
 
 				<section className="portfolio">
 					<div className="container container-portfolio">
-						<h3 className="title-home">BOOKS</h3>
+						<h3 className="title-home">B00KS</h3>
 						<div className="galeria-port">
 							<div className="imagen-port">
 								<img src="https://s26162.pcdn.co/wp-content/uploads/2017/10/the-ritual.jpg" alt="" />
@@ -42,7 +42,7 @@ export const Home = () => {
 				</section>
 
 				<section className="container-ourClients">
-					<h3 className="title-home">CATEGORIES</h3>
+					<h3 className="title-home">C4T3G0R13S</h3>
 					<div className="row">
 						<div className="col-md-4">
 							<div className="card-group-information">

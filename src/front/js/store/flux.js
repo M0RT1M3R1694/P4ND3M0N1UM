@@ -18,8 +18,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			users_search: [],
 			user_id: null,
 
-			books: [],
-			books_search: [],
+			book: [],
+			book_search: [],
 			book_id: null,
 
 			ourCategories: [],
@@ -145,24 +145,76 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		setStore({ favorites: listOfFavorites.concat(selectedItem) });
 			// 	}
 			// },
+
 			//delete selectedFavorite from favorites' list
 			delete_favorites: (selectedFavorite) => {
 				let listOfFavorites = getStore().favorites;
 				setStore({ favorites: listOfFavorites.filter((item) => item !== selectedFavorite) });
 			},
-			get_all_books: async () => {
-				const token = localStorage.getItem('jwt-token')
-				const response = await fetch(process.env.BACKEND_URL + '/book', {
+			fetchBook: async () => {
+				try {
+				  const token = localStorage.getItem('jwt-token');
+				  const response = await fetch(process.env.BACKEND_URL + "/api/book", {
 					method: 'GET',
 					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
+					  'Content-Type': 'application/json',
+					  'Authorization': 'Bearer ' + token
 					}
-				})
-				const result = await response.json()
-				setStore({ books: result.books })
-				setStore({ books_search: result.books })
-			},
+				  });
+				  if (!response.ok) {
+					throw new Error('Network response was not ok');
+				  }
+				  const result = await response.json();
+				  if (result && result.msg === "ok") {
+					// Puedes realizar alguna acción con los libros obtenidos
+					console.log(result.books);
+				  } else {
+					console.error(result.message || 'Error fetching books');
+				  }
+				} catch (error) {
+				  console.error('Error fetching books:', error.message);
+				  console.error('Error details:', error);
+				}
+			  },
+			//  	fetchBook: async () => {
+			// 	try {
+			// 	  const response = await fetch(process.env.BACKEND_URL + "/api/book", {
+			// 		method: 'GET',
+			// 		headers: {
+			// 		  'Content-Type': 'application/json',
+			// 		  'Authorization': 'Bearer ' + localStorage.getItem('jwt-token') // Si es necesario, incluye el token de autorización
+			// 		}
+			// 	  });
+			  
+			// 	  const result = await response.json();
+			  
+			// 	  if (response.ok && result.msg === "ok") {
+			// 		// Puedes realizar alguna acción con los usuarios obtenidos
+			// 		setStore({ book: result.book });
+			// 		console.log (result.book)
+			// 	  } else {
+			// 		// Manejo de error si la solicitud no fue exitosa
+			// 		console.error(result.message || 'Error fetching books');
+			// 	  }
+			// 	} catch (error) {
+			// 	  // Manejo de error en caso de una excepción durante la solicitud
+			// 	  console.error('Error fetching book:', error.message);
+			// 	  console.error('Response:', await error.text());
+			// 	}
+			//   },
+			// get_all_books: async () => {
+			// 	const token = localStorage.getItem('jwt-token')
+			// 	const response = await fetch(process.env.BACKEND_URL + '/book', {
+			// 		method: 'GET',
+			// 		headers: {
+			// 			"Content-Type": "application/json",
+			// 			'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
+			// 		}
+			// 	})
+			// 	const result = await response.json()
+			// 	setStore({ books: result.books })
+			// 	setStore({ books_search: result.books })
+			// },
 			add_book: async () => {
 				const token = localStorage.getItem('jwt-token')
 				const store = getStore()

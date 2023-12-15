@@ -38,35 +38,35 @@ export const OurCategoriesModal = (...props) => {
                             </label>
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="type" className="modal-label-input">Type</label>
+                            <label htmlFor="type" className="modal-label-input">TYP3</label>
                             <div className="input-group group-favorites-modal mb-3 input-select">
                                 <select className="form-select select-favorites_s-modal" id="inputGroupTypes" onChange={actions.handle_change} name='type'>
                                     <option className='option-favorites-modal' defaultValue="null">Select the type</option>
                                     <option className='option-favorites-modal'
                                         selected={!!store.categories_id && store.categories_id.type == "horror" ? true : false}
-                                        value="horror" >Horror
+                                        value="horror" >H0RR0R
                                     </option>
                                     <option className='option-favorites-modal'
                                         selected={!!store.categories_id && store.categories_id.type == "comedy" ? true : false}
-                                        value="comedy">Thriller
+                                        value="comedy">THR1LL3R
                                     </option>
                                     <option className='option-favorites-modal'
                                         selected={!!store.categories_id && store.categories_id.type == "poetry" ? true : false}
-                                        value="poetry">Mystery
+                                        value="poetry">MYST3R1
                                     </option>
                                     <option className='option-favorites-modal'
                                         selected={!!store.categories_id && store.categories_id.type == "fantasy" ? true : false}
-                                        value="fantasy">Fantasy
+                                        value="fantasy">F4NT4SY
                                     </option>
                                     <option className='option-favorites-modal'
                                         selected={!!store.categories_id && store.categories_id.type == "sci-fy" ? true : false}
-                                        value="sci-fy">Sci-fy
+                                        value="sci-fy">SC1-FY
                                     </option>
                                 </select>
                             </div>
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="book" className="modal-label-input">Book</label>
+                            <label htmlFor="book" className="modal-label-input">B00K</label>
                             <div className="input-group group-favorites_s-modal mb-3 input-select">
                                 <select className="form-select select-favorites_s-modal" id="inputGroupBook" onChange={actions.handle_change}
                                     name='book_id'>
@@ -85,7 +85,7 @@ export const OurCategoriesModal = (...props) => {
                         </div>
 
                         <div className="form-group mb-2">
-                            <label htmlFor="comments" className="modal-label-input">Comments</label>
+                            <label htmlFor="comments" className="modal-label-input">C0MM3NTS</label>
                             <textarea
                                 rows="3"
                                 className="form-control formModalFavorites_s"

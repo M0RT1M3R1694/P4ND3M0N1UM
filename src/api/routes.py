@@ -104,7 +104,7 @@ def getUsers():
 # <----------------- Book ----------------------->
 
 
-@api.route('/books', methods=['GET'])
+@api.route('/book', methods=['GET'])
 @jwt_required()
 def getBooks():
     current_user = get_jwt_identity()
@@ -113,9 +113,9 @@ def getBooks():
     if user is None:
         raise APIException("Book not found", status_code=404)
    
-    book = Book.query.all()
+    books = Book.query.all()
     
-    if book is None:
+    if books is None:
         raise APIException("Book not found", status_code=404)
     
     books = list(map(lambda book: book.serialize(), books))

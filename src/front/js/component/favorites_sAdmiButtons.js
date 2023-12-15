@@ -7,7 +7,7 @@ export const Favorites_sAdmiButtons = () => {
         <div>
              <div className="container-favorites m-auto w-75 favorites_sButtons my-3">
             <div className="titleBooksTable mb-3 mt-5 text-start">
-                    <p>Favorites</p>
+                    <p>F4V0R1T3S</p>
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-md-7 col-sm-7 my-3">

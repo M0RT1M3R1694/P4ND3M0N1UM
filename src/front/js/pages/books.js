@@ -11,8 +11,9 @@ export const Books = () => {
     const { store, actions } = useContext(Context)
 
     useEffect(() => {
-        actions.get_all_books()
+        actions.fetchBook()
     }, [store.show_modal])
+    console.log(store.book)
 
     return (
         store.current_user === null ? <h1>Loading...</h1> :

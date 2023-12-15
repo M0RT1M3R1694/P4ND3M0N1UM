@@ -21,7 +21,7 @@ export const BooksTable = ({ book }, ...props) => {
                                             <table className="table table-hover mb-0">
                                                 <tbody>
                                                     <tr>
-                                                        <th scope="row" className="text-center align-middle fs-5">{book.id}</th>
+                                                        <th scope="row" className="text-center align-middle fs-5">{book.name}</th>
                                                         <td className="text-center cell-size align-middle fs-5">{book.description}</td>
                                                         <td className="text-center cell-size align-middle fs-5">{book.author}</td>
                                                         <td className="text-center cell-size align-middle fs-5">

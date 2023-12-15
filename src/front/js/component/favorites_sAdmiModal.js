@@ -33,9 +33,9 @@ export const Favorites_sAdmiModal = (...props) => {
                     </div>
                     <div className="modal-body">
                         <div className="form-group mb-2">
-                            <label htmlFor="userId" className="modal-label-input"
+                            {/* <label htmlFor="userId" className="modal-label-input"
                                 hidden={store.hidden_id} > XXX {!!store.favorites_id ? store.favorites_id.id : ""}
-                            </label>
+                            </label> */}
                         </div>
                         <div className="form-group mb-2">
                             <label htmlFor="type" className="modal-label-input">Type</label>
@@ -66,7 +66,7 @@ export const Favorites_sAdmiModal = (...props) => {
                             </div>
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="book" className="modal-label-input">Book</label>
+                            <label htmlFor="book" className="modal-label-input">B00K</label>
                             <div className="input-group group-favorites_s-modal mb-3 input-select">
                                 <select className="form-select select-favorites_s-modal" id="inputGroupBook" onChange={actions.handle_change}
                                     name='book_id'>
@@ -85,7 +85,7 @@ export const Favorites_sAdmiModal = (...props) => {
                         </div>
 
                         <div className="form-group mb-2">
-                            <label htmlFor="comments" className="modal-label-input">Comments</label>
+                            <label htmlFor="comments" className="modal-label-input">C0MM3NTS</label>
                             <textarea
                                 rows="3"
                                 className="form-control formModalFavorites_s"

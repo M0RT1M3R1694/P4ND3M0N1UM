@@ -7,13 +7,13 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Playfair Display', serif;
   }
   
   .navbar,
   .footer {
     background: #000000;
-    font-family: 'EB Garamond', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.4rem;
     line-height: 140%;
   }
@@ -30,7 +30,7 @@ body {
   
   .btn-login,
   .btn-account {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Playfair Display', serif;
     color: white;
     height: 2.8rem;
     padding: 0px 1.3rem;
@@ -107,18 +107,18 @@ body {
   }
   
   input {
-    font-family: 'Raleway', sans-serif;
+   font-family: 'Playfair Display', serif;
     font-size: 1rem;
     font-weight: 500;
   }
   
   textarea {
-    font-family: 'Raleway', sans-serif;
+   font-family: 'Playfair Display', serif;
     font-size: 1rem;
   }
   
   h5 {
-    font-family: 'Raleway', sans-serif;
+   font-family: 'Playfair Display', serif;
     font-size: 1rem;
     font-weight: 500;
   }

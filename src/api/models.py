@@ -13,7 +13,7 @@ class User (db.Model):
     last_name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(250), nullable=False)
-    role = db.Column(db.String(15), nullable=False)
+    # role = db.Column(db.String(15), nullable=False)
     favorites = db.relationship("Favorites", backref='user', lazy=True)
 
     def __repr__(self):
@@ -48,9 +48,9 @@ class Book (db.Model):
     description = db.Column(db.String(80), nullable=False)
     year = db.Column(db.String(20), nullable=False)
     author = db.Column(db.String(80), nullable=False)
-    categories = db.Column(db.String(80), nullable=False)
+    # categories = db.Column(db.String(80), nullable=False)
     favorites = db.relationship("Favorites", backref='book', lazy=True)
-    categories = db.relationship("Categories", backref='book', lazy=True)
+    # categories = db.relationship("Categories", backref='book', lazy=True)
 
     def __repr__(self):
         return f'<Book {self.name}>'
@@ -62,7 +62,7 @@ class Book (db.Model):
             "description": self.description,
             "year": self.year,
             "author": self.author,
-            "categories": self.categories
+            # "categories": self.categories
         }
 
     def save(self):

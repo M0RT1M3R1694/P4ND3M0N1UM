@@ -20,8 +20,7 @@ export const UsersTable = ({ user }, ...props) => {
                           <tr>
                             <td className="text-center users-cell-size align-middle fs-5">{user.first_name}</td>
                             <td className="text-center users-cell-size align-middle fs-5">{user.last_name}</td>
-                            <td className="text-center users-cell-size align-middle">
-                            </td>
+                            {/* <td className="text-center users-cell-size align-middle"></td> */}
                           </tr>
                         </tbody>
                       </table>

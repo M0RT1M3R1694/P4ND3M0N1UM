@@ -7,7 +7,7 @@ export const BooksButtons = () => {
         <div>
             <div className="container booksButtons my-3">
             <div className="titleBooksTable mb-3 mt-5 text-start">
-                    <p>Books</p>
+                    <p>B00KS</p>
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-md-7 col-sm-7 my-3">
