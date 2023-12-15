@@ -21,7 +21,6 @@ export const Favorites_sAdmiTable = ({ favorites }, ...props) => {
                                                 <tbody>
                                                     <tr>
                                                         <th scope="row" className="text-center cell-size-jobs align-middle fs-5">{favorites.id}</th>
-                                                        <td className="text-center cell-size-Favorites_s align-middle fs-5">{favorites.code}</td>
                                                         <td className="text-center users-cell-size align-middle  fs-5">
                                                             <button className="btn btn-login text-center" onClick={() => { actions.get_favorites_by_id(favorites.id) }}>
                                                                 <i className="fa-solid fa-circle-info me-2" ></i>View Details

@@ -139,12 +139,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				setStore({ users: newUser })
 			},
-            add_user: (selectedItem) => {
-				let listOfFavorites = getStore().user;
-				if (!listOfFavorites.includes(selectedItem)) {
-					setStore({ favorites: listOfFavorites.concat(selectedItem) });
-				}
-			},
+            // add_user: (selectedItem) => {
+			// 	let listOfFavorites = getStore().user;
+			// 	if (!listOfFavorites.includes(selectedItem)) {
+			// 		setStore({ favorites: listOfFavorites.concat(selectedItem) });
+			// 	}
+			// },
 			//delete selectedFavorite from favorites' list
 			delete_favorites: (selectedFavorite) => {
 				let listOfFavorites = getStore().favorites;

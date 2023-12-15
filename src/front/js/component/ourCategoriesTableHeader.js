@@ -14,8 +14,8 @@ export const OurCategoriesTableHeader = () => {
                                             <table className="table mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" className="text-white text-center cell-size-favorites_s">C4T3G0R13S </th>
-                                                        <th scope="col" className="text-white text-center cell-size-davorites_s">XXX</th>
+                                                        <th scope="col" className="text-white text-center cell-size-favorites_s">Type </th>
+                                                        <th scope="col" className="text-white text-center cell-size-davorites_s">Book</th>
 
                                                     </tr>
                                                 </thead>

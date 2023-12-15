@@ -18,7 +18,6 @@ export const UsersTable = ({ user }, ...props) => {
                       <table className="table table-hover mb-0">
                         <tbody>
                           <tr>
-                            <th scope="row" className="text-center users-cell-size align-middle fs-5">{user.id}</th>
                             <td className="text-center users-cell-size align-middle fs-5">{user.first_name}</td>
                             <td className="text-center users-cell-size align-middle fs-5">{user.last_name}</td>
                             <td className="text-center users-cell-size align-middle">

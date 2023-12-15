@@ -14,9 +14,7 @@ export const Favorites_sAdmiTableHeader = () => {
                                             <table className="table mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" className="text-white text-center cell-size-favorites_s">Favorites ID</th>
-                                                        <th scope="col" className="text-white text-center cell-size-davorites_s">Code</th>
-
+                                                        <th scope="col" className="text-white text-center cell-size-favorites_s">Favorites</th>
                                                     </tr>
                                                 </thead>
                                             </table>

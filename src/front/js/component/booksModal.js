@@ -43,6 +43,17 @@ export const BooksModal = (...props) => {
                                 onChange={actions.handle_change}
                                 defaultValue={!!store.book_id ? store.book_id.name : ""}
                             />
+                            <div className="form-group mb-2">
+                            <label htmlFor="lastName" className="modal-label-input">Description</label>
+                            <input
+                                type="text"
+                                className="form-control formModalBooks"
+                                id="lastName"
+                                name="last_name"
+                                onChange={actions.handle_change}
+                                defaultValue={!!store.book_id ? store.book_id.description : ""}
+                            />
+                        </div>
                         </div>
                         <div className="form-group mb-2">
                             <label htmlFor="lastName" className="modal-label-input">Author</label>
@@ -52,7 +63,7 @@ export const BooksModal = (...props) => {
                                 id="lastName"
                                 name="last_name"
                                 onChange={actions.handle_change}
-                                defaultValue={!!store.book_id ? store.book_id.last_name : ""}
+                                defaultValue={!!store.book_id ? store.book_id.author : ""}
                             />
                         </div>
                     </div>
