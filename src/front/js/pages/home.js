@@ -11,7 +11,7 @@ export const Home = () => {
 				<section className="titles-header">
 					<h1>W3LC0M3 T0 H3LL</h1><br>
 					</br>
-					<h1>W1LLK0MM32N 1N D3R HÖLL3</h1><br>
+					<h1>W1LLK0MM3N 1N D3R HÖLL3</h1><br>
 					</br>
 					<h1>ДОБРО ПОЖАЛОВАТЬ В (АД </h1>
 				</section>

@@ -190,7 +190,7 @@ h6.subtitles-home {
     transform: scale(1);
 }
 
-/*------------------------------------------USERS----------------------------------------*/
+/*------------------------------------------categories----------------------------------------*/
 
 
 .container-ourClients {
@@ -247,7 +247,7 @@ h6.subtitles-home {
 }
 
 .team-ind img {
-    width: 20%;
+    width: 30%;
 }
 
 .team-ind h3 {
@@ -258,7 +258,6 @@ h6.subtitles-home {
 .team-ind p {
     font-weight: 300;
     align-items: center;
-
 }
 
 /*------------------------------------------MEDIA RESPONSIVE----------------------------------------*/
