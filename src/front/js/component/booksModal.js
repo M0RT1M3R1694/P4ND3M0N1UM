@@ -34,7 +34,7 @@ export const BooksModal = (...props) => {
                             <label htmlFor="bookId" className="modal-label-input" hidden={store.hidden_id}>B00K {!!store.book_id ? store.book_id.id : ""}</label>
                         </div>
                         <div className="form-group mb-2">
-                            <label htmlFor="firstName" className="modal-label-input">Name</label>
+                            <label htmlFor="firstName" className="modal-label-input">N4M3</label>
                             <input
                                 type="text"
                                 className="form-control formModalBooks"
@@ -44,16 +44,16 @@ export const BooksModal = (...props) => {
                                 defaultValue={!!store.book_id ? store.book_id.name : ""}
                             />
                             <div className="form-group mb-2">
-                            <label htmlFor="lastName" className="modal-label-input">D3SCR1PT10N</label>
-                            <input
-                                type="text"
-                                className="form-control formModalBooks"
-                                id="lastName"
-                                name="last_name"
-                                onChange={actions.handle_change}
-                                defaultValue={!!store.book_id ? store.book_id.description : ""}
-                            />
-                        </div>
+                                <label htmlFor="lastName" className="modal-label-input">D3SCR1PT10N</label>
+                                <input
+                                    type="text"
+                                    className="form-control formModalBooks"
+                                    id="lastName"
+                                    name="last_name"
+                                    onChange={actions.handle_change}
+                                    defaultValue={!!store.book_id ? store.book_id.description : ""}
+                                />
+                            </div>
                         </div>
                         <div className="form-group mb-2">
                             <label htmlFor="lastName" className="modal-label-input">4UTH0R</label>

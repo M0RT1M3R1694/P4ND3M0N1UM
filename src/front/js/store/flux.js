@@ -328,12 +328,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				favorites.code = store.code
 
-				if (store.type != null) {
-					favorites.type = store.type
-				}
-				if (store.model != null) {
-					favorites.model = store.model
-				}
+				// if (store.type != null) {
+				// 	favorites.type = store.type
+				// }
+				// if (store.model != null) {
+				// 	favorites.model = store.model
+				// }
 				if (store.book_id != null) {
 					favorites.id_book = store.book_id
 				}
