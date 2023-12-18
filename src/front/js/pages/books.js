@@ -21,7 +21,7 @@ export const Books = () => {
                 <>
                     <BooksButtons />
                     <BooksTableHeader />
-                    {!!store.books && store.books.map((book, index) => {
+                    {!!store.books && store.book.map((book, index) => {
                         return (
                             <BooksTable key={index} book={book} />
                         )

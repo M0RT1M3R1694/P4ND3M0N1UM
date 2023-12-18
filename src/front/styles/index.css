@@ -22,7 +22,7 @@ body {
     color: rgb(255, 255, 255);
   
     &:hover {
-      color: #22B5BE;
+      color: #d9237b ;
       -webkit-transform: translateY(-0.25em);
       transform: translateY(-0.25em);
     }

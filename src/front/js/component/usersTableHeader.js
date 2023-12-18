@@ -14,8 +14,8 @@ export const UsersTableHeader = () => {
                       <table className="table mb-0">
                         <thead>
                           <tr>
-                            <th scope="col" className="text-white text-center users-cell-size">First Name</th>
-                            <th scope="col" className="text-white text-center users-cell-size">Last Name</th>
+                            <th scope="col" className="text-white text-center users-cell-size">F1RST N4M3</th>
+                            <th scope="col" className="text-white text-center users-cell-size">L4ST N4M3</th>
                           </tr>
                         </thead>
                       </table>

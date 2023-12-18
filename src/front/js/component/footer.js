@@ -31,11 +31,11 @@ export const Footer = () => {
 						</Link>
 					</div>
 
-					<div className="col">
+					{/* <div className="col">
 						<Link to="/ourCategories" className="link-footer text-decoration-none" hidden={store.buttons_admin_tech.ourCategories}>
 							<span className="footer-span">C4T3G0R13S</span>
 						</Link>
-					</div>
+					</div> */}
 
 				</div>
 				<div className="col-md-12 col-lg-2 col-sm-12 text-center m-auto">

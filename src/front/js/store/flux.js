@@ -167,13 +167,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  const result = await response.json();
 				  if (result && result.msg === "ok") {
 					// Puedes realizar alguna acción con los libros obtenidos
+					setStore({ book: result.books });
 					console.log(result.books);
 				  } else {
 					console.error(result.message || 'Error fetching books');
 				  }
 				} catch (error) {
 				  console.error('Error fetching books:', error.message);
-				  console.error('Error details:', error);
 				}
 			  },
 			//  	fetchBook: async () => {
@@ -225,7 +225,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					book.name = store.name
 				}
 				if (store.description != null) {
-					book.description = store.ldescription
+					book.description = store.description
 				}
 				if (store.author != null) {
 					book.author = store.author
@@ -399,10 +399,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ hidden_id: true })
 				}
 				if (!!store.favorites_id != true) {
-					actions.random_code_favorites()
+					actions.random_favorites()
 					setStore({ hidden_id: true })
-					setStore({ hidden_time_stamp: true })
-					setStore({ hidden_btn_new_code: false })
+					// setStore({ hidden_time_stamp: true })
+					// setStore({ hidden_btn_new_code: false })
 				}
 			},
 			handle_delete_modal: () => {

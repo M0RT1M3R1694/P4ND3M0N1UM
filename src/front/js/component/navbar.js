@@ -28,11 +28,11 @@ export const Navbar = () => {
 								<span className="nav-span">B00KS</span>
 							</Link>
 						</li>
-						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.ourCategories}>
+						{/* <li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.ourCategories}>
 							<Link to="/ourCategories" className="nav-link text-decoration-none">
 								<span className="nav-span">C4T3G0R13S</span>
 							</Link>
-						</li>
+						</li> */}
 						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.favorites_sadmi}>
 							<Link to="/favorites_sadmi" className="nav-link text-decoration-none">
 								<span className="nav-span">F4V0R1T3S</span>

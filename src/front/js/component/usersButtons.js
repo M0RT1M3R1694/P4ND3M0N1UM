@@ -7,19 +7,19 @@ export const UsersButtons = () => {
     <div>
       <div className="container usersButtons my-3">
       <div className="titleBooksTable mb-3 mt-5 text-start">
-                    <p>Comunity</p>
+                    <p>C0MUN1TY</p>
                 </div>
         <div className="row justify-content-center">
           <div className="col-md-7 col-sm-7 my-3">
             <div className="card usersCard">
               <div className="card-body pb-0 pt-0">
                 <div className="input-search d-flex align-items-center">
-                  <input type="text" id="inputUsersSearch" className="form-control formControlUsersButtons"
+                  {/* <input type="text" id="inputUsersSearch" className="form-control formControlUsersButtons"
                     autoComplete="off" aria-describedby="passwordHelpInline" placeholder='Search User'
                     onKeyUp={(e) => {
                       actions.search_users(e.target.value)
                     }} />
-                  <i className="fa-solid fa-magnifying-glass me-2"></i>
+                  <i className="fa-solid fa-magnifying-glass me-2"></i> */}
                 </div>
               </div>
             </div>
