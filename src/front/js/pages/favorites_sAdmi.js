@@ -11,7 +11,7 @@ export const Favorites_sAdmi = () => {
     const { store, actions } = useContext(Context)
 
     useEffect(() => {
-        actions.get_all_favorites_s()
+        actions.fetchFavorites()
     }, [store.show_modal, store.favorites_sdeleted])
 
     return (

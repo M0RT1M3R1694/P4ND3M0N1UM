@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			last_name: null,
 			password: null,
 
-			favorites_s: [],
+			favorites: [],
 			favorites_search: [],
 			favorites_id: null,
 			favorites_deleted: false,
@@ -121,11 +121,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				const result = await response.json()
 				console.log(result)
-				if (response.ok){
+				if (response.ok) {
 					setStore({ current_user: result })
-				 } else {
+				} else {
 					setStore({ current_user: false })
-				 }
+				}
 			},
 			search_users: (input) => {
 				const store = getStore();
@@ -139,7 +139,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				setStore({ users: newUser })
 			},
-            // add_user: (selectedItem) => {
+			// add_user: (selectedItem) => {
 			// 	let listOfFavorites = getStore().user;
 			// 	if (!listOfFavorites.includes(selectedItem)) {
 			// 		setStore({ favorites: listOfFavorites.concat(selectedItem) });
@@ -153,30 +153,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			fetchBook: async () => {
 				try {
-				  const token = localStorage.getItem('jwt-token');
-				  const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/book", {
-					method: 'GET',
-					headers: {
-					  'Content-Type': 'application/json',
-					  'Authorization': 'Bearer ' + token
+					const token = localStorage.getItem('jwt-token');
+					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/book", {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Bearer ' + token
+						}
+					});
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
 					}
-				  });
-				  if (!response.ok) {
-					throw new Error('Network response was not ok');
-				  }
-				  const result = await response.json();
-				  if (result && result.msg === "ok") {
-					// Puedes realizar alguna acción con los libros obtenidos
-					setStore({ book: result.books });
-					console.log(result.books);
-				  } else {
-					console.error(result.message || 'Error fetching books');
-				  }
+					const result = await response.json();
+					if (result && result.msg === "ok") {
+						// Puedes realizar alguna acción con los libros obtenidos
+						setStore({ book: result.books });
+						console.log(result.books);
+					} else {
+						console.error(result.message || 'Error fetching books');
+					}
 				} catch (error) {
-				  console.error('Error fetching books:', error.message);
-				  console.error('Error details:', error.message);
+					console.error('Error fetching books:', error.message);
+					console.error('Error details:', error.message);
 				}
-			  },
+			},
 			//  	fetchBook: async () => {
 			// 	try {
 			// 	  const response = await fetch(process.env.BACKEND_URL + "/api/book", {
@@ -186,9 +186,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		  'Authorization': 'Bearer ' + localStorage.getItem('jwt-token') // Si es necesario, incluye el token de autorización
 			// 		}
 			// 	  });
-			  
+
 			// 	  const result = await response.json();
-			  
+
 			// 	  if (response.ok && result.msg === "ok") {
 			// 		// Puedes realizar alguna acción con los usuarios obtenidos
 			// 		setStore({ book: result.book });
@@ -269,30 +269,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-			 fetchUsers: async () => {
+			fetchUsers: async () => {
 				try {
-				  const response = await fetch(process.env.BACKEND_URL + "/user", {
-					method: 'GET',
-					headers: {
-					  'Content-Type': 'application/json',
-					  'Authorization': 'Bearer ' + localStorage.getItem('jwt-token') // Si es necesario, incluye el token de autorización
+					const response = await fetch(process.env.BACKEND_URL + "/user", {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Bearer ' + localStorage.getItem('jwt-token') // Si es necesario, incluye el token de autorización
+						}
+					});
+
+					const result = await response.json();
+
+					if (response.ok && result.msg === "ok") {
+						// Puedes realizar alguna acción con los usuarios obtenidos
+						setStore({ users: result.Users });
+					} else {
+						// Manejo de error si la solicitud no fue exitosa
+						console.error(result.message || 'Error fetching users');
 					}
-				  });
-			  
-				  const result = await response.json();
-			  
-				  if (response.ok && result.msg === "ok") {
-					// Puedes realizar alguna acción con los usuarios obtenidos
-					setStore({ users: result.Users });
-				  } else {
-					// Manejo de error si la solicitud no fue exitosa
-					console.error(result.message || 'Error fetching users');
-				  }
 				} catch (error) {
-				  // Manejo de error en caso de una excepción durante la solicitud
-				  console.error('Error fetching users:', error.message);
+					// Manejo de error en caso de una excepción durante la solicitud
+					console.error('Error fetching users:', error.message);
 				}
-			  },
+			},
 			search_books: (input) => {
 				const store = getStore()
 				const newBook = store.books_search.filter(book => {
@@ -305,7 +305,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				setStore({ books: newBook })
 			},
-
+			fetchFavorites: async () => {
+				try {
+					const token = localStorage.getItem('jwt-token');
+					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/favorites", {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Bearer ' + token
+						}
+					});
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					const result = await response.json();
+					if (result && result.msg === "ok") {
+						// Puedes realizar alguna acción con los libros obtenidos
+						setStore({ favorites: result.favorites_s });
+						console.log(result.favorites_s);
+					} else {
+						console.error(result.message || 'Error fetching favorites');
+					}
+				} catch (error) {
+					console.error('Error fetching favorites:', error.message);
+					console.error('Error details:', error.message);
+				}
+			},
 			get_all_favorites_s: async () => {
 				const token = localStorage.getItem('jwt-token')
 				const response = await fetch(process.env.BACKEND_URL + '/favorites', {
@@ -379,7 +404,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			search_favorites: (input) => {
 				const store = getStore();
 
-				const newFavorites= store.favorites_s_search.filter(favorites => {
+				const newFavorites = store.favorites_s_search.filter(favorites => {
 					if (favorites.code.includes(input) ||
 						favorites.type.toLowerCase().includes(input.toLowerCase()) ||
 						favorites.id.toString().includes(input)) {
@@ -412,7 +437,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ show_modal: false })
 				setStore({ user_id: null })
 				setStore({ book_id: null })
-				setStore({ favorites_id: null })
+				// setStore({ favorites_id: null })
 
 				actions.clear_store()
 
