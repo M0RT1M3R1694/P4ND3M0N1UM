@@ -324,7 +324,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ favorites: result.favorites_s });
 						console.log(result.favorites_s);
 					} else {
-						console.error(result.message || 'Error fetching favorites');
+						console.error(result.message || 'Error fetching favorites_s');
 					}
 				} catch (error) {
 					console.error('Error fetching favorites:', error.message);

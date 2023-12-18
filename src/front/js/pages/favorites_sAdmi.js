@@ -12,21 +12,20 @@ export const Favorites_sAdmi = () => {
 
     useEffect(() => {
         actions.fetchFavorites()
-    }, [store.show_modal, store.favorites_sdeleted])
+    }, [store.show_modal])
+    console.log(store.favorites)
 
     return (
-            store.current_user === null ? <h1>Loading...</h1> :
-            store.current_user === false ? <h1>You must login to view this page.</h1> :
+            store.favorites === null ? <h1>Loading...</h1> :
+            store.favorites === false ? <h1>You must login to view this page.</h1> :
 
         <>
             <Favorites_sAdmiButtons/>
             <Favorites_sAdmiTableHeader/>
-            {!!store.favorites_s && store.favorites_s.map((favorites, index) => {
-                return(
+            {!!store.favorites && store.favorites.map((favorites, index) => (
 
                     <Favorites_sAdmiTable key={index} favorites={favorites}/>
-                    )
-                })}
+                ))}
             <Favorites_sAdmiModal show={store.show_modal}/>
         </>
     )
