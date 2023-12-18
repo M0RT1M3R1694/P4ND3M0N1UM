@@ -90,7 +90,7 @@ class Categories (db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "id_book": self.id_book
+            "book": self.id_book
         }
 
     def save(self):
@@ -109,6 +109,7 @@ class Favorites (db.Model):
     id = db.Column(db.Integer, primary_key=(True))
     id_book = db.Column(db.Integer, db.ForeignKey(Book.id))
     id_user = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    user = db.relationship("User", backref='book', lazy=True)
 
     def __repr__(self):
         return f'<Favorites {self.id}>'
