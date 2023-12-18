@@ -35,6 +35,7 @@ table td {
     margin-bottom: 1rem;
     border-image: linear-gradient(to right, #D04E8D, #6D2CBF);
     border-image-slice: 1;
+    font-weight: bold;
     background: var(--gradient-2, linear-gradient(129deg, #dc649e 0%, #6D2CBF 100%));
 
 }

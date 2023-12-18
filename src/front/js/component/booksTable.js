@@ -22,10 +22,12 @@ export const BooksTable = ({ book }, ...props) => {
                                                 <tbody>
                                                     <tr>
                                                         <th scope="row" className="text-center align-middle fs-5">{book.name}</th>
+                                                        <td className="text-center cell-size align-middle fs-5"></td>
                                                         <td className="text-center cell-size align-middle fs-5">{book.description}</td>
+                                                        <td className="text-center cell-size align-middle fs-5"></td>
                                                         <td className="text-center cell-size align-middle fs-5">{book.author}</td>
                                                         <td className="text-center cell-size align-middle fs-5">
-                                                            <button className="btn btn-login text-center" onClick={() => {actions.get_book_by_id(book.id)}}>
+                                                            <button className="btn btn-login text-center" onClick={() => {actions.get_book_id(book.id)}}>
                                                                 <i className="fa-regular fa-pen-to-square me-2"></i>Edit
                                                             </button>
                                                         </td>

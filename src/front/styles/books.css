@@ -26,9 +26,8 @@ table td {
     border: none;
     outline: none;
     margin-bottom: 1rem;
-    /* font-weight: bold; */
-    background: var(--gradient-2, linear-gradient(129deg, #2cd7e0 0%, #6743CC 100%));
-    
+    font-weight: bold;
+    background: var(--gradient-2, linear-gradient(129deg, #dc649e 0%, #6D2CBF 100%));
 }
 
 .tableHeader {

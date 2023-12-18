@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			password: null,
 
 			favorites_s: [],
-			favorites_s_search: [],
+			favorites_search: [],
 			favorites_id: null,
 			favorites_deleted: false,
 
@@ -154,7 +154,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchBook: async () => {
 				try {
 				  const token = localStorage.getItem('jwt-token');
-				  const response = await fetch(process.env.BACKEND_URL + "/api/book", {
+				  const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/book", {
 					method: 'GET',
 					headers: {
 					  'Content-Type': 'application/json',
@@ -174,6 +174,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  }
 				} catch (error) {
 				  console.error('Error fetching books:', error.message);
+				  console.error('Error details:', error.message);
 				}
 			  },
 			//  	fetchBook: async () => {
@@ -375,7 +376,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				}
 			},
-			search_favoritess: (input) => {
+			search_favorites: (input) => {
 				const store = getStore();
 
 				const newFavorites= store.favorites_s_search.filter(favorites => {
