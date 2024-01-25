@@ -27,8 +27,8 @@ export const BooksTable = ({ book }, ...props) => {
                                                         <td className="text-center cell-size align-middle fs-5"></td>
                                                         <td className="text-center cell-size align-middle fs-5">{book.author}</td>
                                                         <td className="text-center cell-size align-middle fs-5">
-                                                            <button className="btn btn-login text-center" onClick={() => {actions.get_book_id(book.id)}}>
-                                                                <i className="fa-regular fa-pen-to-square me-2"></i>Edit
+                                                            <button className="btn btn-login text-center" onClick={() => {actions.detele_book_by_id(book.id)}}>
+                                                                <i className="fa-regular fa-pen-to-square me-2"></i>D3L3T3
                                                             </button>
                                                         </td>
                                                     </tr>

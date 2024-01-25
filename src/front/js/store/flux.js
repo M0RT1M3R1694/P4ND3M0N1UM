@@ -61,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							password: store.password
 						}
 					}
-					const response = await fetch(process.env.BACKEND_URL + "/login", {
+					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/login", {
 						method: 'POST',
 						body: JSON.stringify(user),
 						headers: {
@@ -139,14 +139,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				setStore({ users: newUser })
 			},
-			// add_user: (selectedItem) => {
-			// 	let listOfFavorites = getStore().user;
-			// 	if (!listOfFavorites.includes(selectedItem)) {
-			// 		setStore({ favorites: listOfFavorites.concat(selectedItem) });
-			// 	}
-			// },
-
-			//delete selectedFavorite from favorites' list
 			delete_favorites: (selectedFavorite) => {
 				let listOfFavorites = getStore().favorites;
 				setStore({ favorites: listOfFavorites.filter((item) => item !== selectedFavorite) });
@@ -177,45 +169,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('Error details:', error.message);
 				}
 			},
-			//  	fetchBook: async () => {
-			// 	try {
-			// 	  const response = await fetch(process.env.BACKEND_URL + "/api/book", {
-			// 		method: 'GET',
-			// 		headers: {
-			// 		  'Content-Type': 'application/json',
-			// 		  'Authorization': 'Bearer ' + localStorage.getItem('jwt-token') // Si es necesario, incluye el token de autorización
-			// 		}
-			// 	  });
-
-			// 	  const result = await response.json();
-
-			// 	  if (response.ok && result.msg === "ok") {
-			// 		// Puedes realizar alguna acción con los usuarios obtenidos
-			// 		setStore({ book: result.book });
-			// 		console.log (result.book)
-			// 	  } else {
-			// 		// Manejo de error si la solicitud no fue exitosa
-			// 		console.error(result.message || 'Error fetching books');
-			// 	  }
-			// 	} catch (error) {
-			// 	  // Manejo de error en caso de una excepción durante la solicitud
-			// 	  console.error('Error fetching book:', error.message);
-			// 	  console.error('Response:', await error.text());
-			// 	}
-			//   },
-			// get_all_books: async () => {
-			// 	const token = localStorage.getItem('jwt-token')
-			// 	const response = await fetch(process.env.BACKEND_URL + '/book', {
-			// 		method: 'GET',
-			// 		headers: {
-			// 			"Content-Type": "application/json",
-			// 			'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-			// 		}
-			// 	})
-			// 	const result = await response.json()
-			// 	setStore({ books: result.books })
-			// 	setStore({ books_search: result.books })
-			// },
 			add_book: async () => {
 				const token = localStorage.getItem('jwt-token')
 				const store = getStore()
@@ -271,7 +224,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			fetchUsers: async () => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + "/user", {
+					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/user", {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -331,19 +284,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('Error details:', error.message);
 				}
 			},
-			get_all_favorites_s: async () => {
-				const token = localStorage.getItem('jwt-token')
-				const response = await fetch(process.env.BACKEND_URL + '/favorites', {
-					method: 'GET',
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-				setStore({ favorites_s: result.Favorites_s })
-				setStore({ favorites_s_search: result.Favorites_s })
-			},
 			add_favorites: async () => {
 				const token = localStorage.getItem('jwt-token')
 				const store = getStore()
@@ -401,34 +341,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				}
 			},
-			search_favorites: (input) => {
-				const store = getStore();
-
-				const newFavorites = store.favorites_s_search.filter(favorites => {
-					if (favorites.code.includes(input) ||
-						favorites.type.toLowerCase().includes(input.toLowerCase()) ||
-						favorites.id.toString().includes(input)) {
-						return favorites
-					}
-				})
-				setStore({ favorites_s: newFavorites })
-			},
-			handle_show_modal: () => {
-				const store = getStore()
+			delete_book_by_id: async (bookId) => {
 				const actions = getActions()
-				setStore({ show_modal: true })
-				if (!!store.user_id != true) {
-					setStore({ read_only_username: false })
-					setStore({ hidden_id: true })
-				}
-				if (!!store.book_id != true) {
-					setStore({ hidden_id: true })
-				}
-				if (!!store.favorites_id != true) {
-					actions.random_favorites()
-					setStore({ hidden_id: true })
-					// setStore({ hidden_time_stamp: true })
-					// setStore({ hidden_btn_new_code: false })
+			try {
+					const token = localStorage.getItem('jwt-token');
+					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/book/${bookId}", {
+						method: 'DELETE',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Bearer ' + token
+						},
+					});
+
+					if (!response.ok) {
+						throw new Error ("Network response was not ok");
+					}
+
+					const result = await response.json();
+					if (result && result.msg === "ok") {
+						console.log("Book with ID ${bookId} deleted successfully");
+						actions.fetchBook();
+					} 
+					else{
+						console.error(result.message || "Error deleting book");
+					}			
+					} cath (error) {
+					console.error("Error deleting book:", error.message);
 				}
 			},
 			handle_delete_modal: () => {
