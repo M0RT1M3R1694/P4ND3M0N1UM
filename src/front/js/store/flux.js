@@ -61,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							password: store.password
 						}
 					}
-					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/login", {
+					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/login", {
 						method: 'POST',
 						body: JSON.stringify(user),
 						headers: {
@@ -146,7 +146,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchBook: async () => {
 				try {
 					const token = localStorage.getItem('jwt-token');
-					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/book", {
+					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book", {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -185,8 +185,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					book.author = store.author
 				}
 
-				const response = await fetch(process.env.BACKEND_URL + '/book', {
-					method: 'POST',
+				const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book", {
+					method: 'GET',
 					body: JSON.stringify(book),
 					headers: {
 						"Content-Type": "application/json",
@@ -196,7 +196,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const result = await response.json()
 
 				if (result.msg == "ok") {
-					actions.handle_delete_modal()
+					actions.add_book()
 					Swal.fire({
 						position: 'top-end',
 						icon: 'success',
@@ -224,7 +224,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			fetchUsers: async () => {
 				try {
-					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/user", {
+					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/user", {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -261,7 +261,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchFavorites: async () => {
 				try {
 					const token = localStorage.getItem('jwt-token');
-					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/favorites", {
+					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/favorites", {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -341,11 +341,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				}
 			},
-			delete_book_by_id: async (bookId) => {
+			deleteBookById: async (bookId) => {
 				const actions = getActions()
-			try {
+				try {
 					const token = localStorage.getItem('jwt-token');
-					const response = await fetch("https://glowing-couscous-6j9qr64v5q625q9r-3001.app.github.dev/api/book/${bookId}", {
+					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book/${bookId}", {
 						method: 'DELETE',
 						headers: {
 							'Content-Type': 'application/json',
@@ -361,11 +361,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (result && result.msg === "ok") {
 						console.log("Book with ID ${bookId} deleted successfully");
 						actions.fetchBook();
-					} 
-					else{
+					} else{
 						console.error(result.message || "Error deleting book");
 					}			
-					} cath (error) {
+					} catch (error) {
 					console.error("Error deleting book:", error.message);
 				}
 			},

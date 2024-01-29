@@ -4,7 +4,7 @@
 
     font-size: 2.5rem;
     font-weight: bolder;
-    background: var(--gradient-2, linear-gradient(129deg, #22B5BE 0%, #6743CC 100%));
+    background: var(--gradient-2, linear-gradient(129deg, #dc649e 0%, #6D2CBF 100%));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -38,8 +38,7 @@ table td {
     outline: none;
     margin-bottom: 1rem;
     font-weight: bold;
-    background: var(--gradient-2, linear-gradient(129deg, #2cd7e0 0%, #6743CC 100%));
-
+    background: var(--gradient-2, linear-gradient(129deg, #dc649e 0%, #6D2CBF 100%));
 }
 
 .tableFavorites_sHeader {

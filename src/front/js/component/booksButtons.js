@@ -27,13 +27,13 @@ export const BooksButtons = () => {
                     <div className="col-md-3 col-sm-3 my-2">
                         <div className="card booksCard d-flex justify-content-center align-items-center">
                             <div className="card-body pb-0 pt-0">
-                                <button className="btn btn-login my-1" onClick={() => {actions.handle_show_modal()}}>
+                                <button className="btn btn-login my-1" onClick={() => {actions.add_book()}}>
                                     <i className="fa-solid me-2"></i>4DD</button>
                             </div>
-                            <div className="card-body pb-0 pt-0">
+                            {/* <div className="card-body pb-0 pt-0">
                                 <button className="btn btn-login my-1" onClick={() => {actions.handle_show_modal()}}>
                                     <i className="fa-solid me-2"></i>D3L3T3</button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
