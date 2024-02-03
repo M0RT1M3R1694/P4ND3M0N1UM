@@ -112,7 +112,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isAuth: async () => {
 				const token = localStorage.getItem('jwt-token')
 
-				const response = await fetch(process.env.BACKEND_URL + "/isAuth", {
+				const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/isAuth", {
 					method: 'GET',
 					headers: {
 						"Content-Type": "application/json",
@@ -348,7 +348,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const actions = getActions()
 				try {
 					const token = localStorage.getItem('jwt-token');
-					const response = await fetch(`https://sturdy-space-memory-jxjv46qrgj5hq4pp-3000.app.github.dev/api/book/${bookId}`, {
+					const response = await fetch(`https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book/${bookId}`, {
 						method: 'DELETE',
 						headers: {
 							'Content-Type': 'application/json',
