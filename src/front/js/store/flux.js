@@ -61,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							password: store.password
 						}
 					}
-					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/login", {
+					const response = await fetch(`https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/login`, {
 						method: 'POST',
 						body: JSON.stringify(user),
 						headers: {
@@ -101,7 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 
 				} catch (error) {
-					console.log(error + " Error in login_user backEnd")
+					console.log(error + "Error in login_user backEnd")
 					setStore({ current_user: false })
 				}
 			},
@@ -127,22 +127,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ current_user: false })
 				}
 			},
-			search_users: (input) => {
-				const store = getStore();
+			// search_users: (input) => {
+			// 	const store = getStore();
 
-				const newUser = store.users_search.filter(user => {
-					if (user.first_name.toLowerCase().includes(input.toLowerCase()) ||
-						user.last_name.toLowerCase().includes(input.toLowerCase()) ||
-						user.id.toString().includes(input)) {
-						return user
-					}
-				})
-				setStore({ users: newUser })
-			},
-			delete_favorites: (selectedFavorite) => {
-				let listOfFavorites = getStore().favorites;
-				setStore({ favorites: listOfFavorites.filter((item) => item !== selectedFavorite) });
-			},
+			// 	const newUser = store.users_search.filter(user => {
+			// 		if (user.first_name.toLowerCase().includes(input.toLowerCase()) ||
+			// 			user.last_name.toLowerCase().includes(input.toLowerCase()) ||
+			// 			user.id.toString().includes(input)) {
+			// 			return user
+			// 		}
+			// 	})
+			// 	setStore({ users: newUser })
+			// },
+			// delete_favorites: (selectedFavorite) => {
+			// 	let listOfFavorites = getStore().favorites;
+			// 	setStore({ favorites: listOfFavorites.filter((item) => item !== selectedFavorite) });
+			// },
 			fetchBook: async () => {
 				try {
 					const token = localStorage.getItem('jwt-token');
@@ -169,62 +169,65 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('Error details:', error.message);
 				}
 			},
-			add_book: async () => {
-				const token = localStorage.getItem('jwt-token')
-				const store = getStore()
-				const actions = getActions()
+			// addBookById: async (bookId) => {
+			// 	const actions = getActions()
+			// 	try {
+			// 		const token = localStorage.getItem('jwt-token');
+			// 		const esponse = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book/${bookId}", {
+			// 			method: 'GET',
+			// 			headers: {
+			// 				'Content-Type': 'application/json',
+			// 				'Authorization': 'Bearer ' + token
+			// 			},
+			// 		});
+			// 		// let book = {}
+			// 		// if (store.name != null) {
+			// 		// book.name = store.name
+			// 		// }
+			// 		// if (store.description != null) {
+			// 		// book.description = store.description
+			// 		// }
+			// 		// if (store.author != null) {
+			// 		// book.author = store.author
+			// 		// }
+			// 		if (!response.ok) {
+			// 			throw new Error ("Network response was not ok");
+			// 		}
 
-				let book = {}
-				if (store.name != null) {
-					book.name = store.name
-				}
-				if (store.description != null) {
-					book.description = store.description
-				}
-				if (store.author != null) {
-					book.author = store.author
-				}
+			// 		const result = await response.json()
 
-				const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book", {
-					method: 'GET',
-					body: JSON.stringify(book),
-					headers: {
-						"Content-Type": "application/json",
-						'Authorization': 'Bearer ' + token // ⬅⬅⬅ authorization token
-					}
-				})
-				const result = await response.json()
-
-				if (result.msg == "ok") {
-					actions.add_book()
-					Swal.fire({
-						position: 'top-end',
-						icon: 'success',
-						title: 'Add',
-						text: `The Book ${result.book.name} ${result.book.description} was added`,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-					actions.clear_store()
-				} else {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'error',
-						title: 'Opppsss',
-						text: result.message,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-				}
-
-			},
+			// 		if (result.msg == "ok") {
+			// 			actions.fetchBook()
+			// 			Swal.fire({
+			// 			position: 'top-end',
+			// 			icon: 'success',
+			// 			title: 'Add',
+			// 			text: `The Book ${result.book.name} was added`,
+			// 			showConfirmButton: false,
+			// 			color: '#FFFFFF',
+			// 			background: '#41206C',
+			// 			timer: 3000
+			// 		})
+			// 		// actions.clear_store()
+			// 	} else {
+			// 		Swal.fire({
+			// 			position: 'top-end',
+			// 			icon: 'error',
+			// 			title: 'Opppsss',
+			// 			text: result.message,
+			// 			showConfirmButton: false,
+			// 			color: '#FFFFFF',
+			// 			background: '#41206C',
+			// 			timer: 3000
+			// 		})
+			// 		} catch (error) {
+			// 		console.error("Error adding book:", error.message);
+			// 		setStore({fetchBook: false })
+			// 	}
+			// },
 			fetchUsers: async () => {
 				try {
-					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/user", {
+					const response = await fetch(`https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/user`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -246,18 +249,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('Error fetching users:', error.message);
 				}
 			},
-			search_books: (input) => {
-				const store = getStore()
-				const newBook = store.books_search.filter(book => {
-					if (book.id.toString().includes(input) ||
-						book.name.toLowerCase().includes(input.toLowerCase()) ||
-						book.description.toLowerCase().includes(input.toLowerCase()) ||
-						book.author.toLowerCase().includes(input.toLowerCase())) {
-						return book
-					}
-				})
-				setStore({ books: newBook })
-			},
+			// search_books: (input) => {
+			// 	const store = getStore()
+			// 	const newBook = store.books_search.filter(book => {
+			// 		if (book.id.toString().includes(input) ||
+			// 			book.name.toLowerCase().includes(input.toLowerCase()) ||
+			// 			book.description.toLowerCase().includes(input.toLowerCase()) ||
+			// 			book.author.toLowerCase().includes(input.toLowerCase())) {
+			// 			return book
+			// 		}
+			// 	})
+			// 	setStore({ books: newBook })
+			// },
 			fetchFavorites: async () => {
 				try {
 					const token = localStorage.getItem('jwt-token');
@@ -279,7 +282,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					} else {
 						console.error(result.message || 'Error fetching favorites_s');
 					}
-				} catch (error) {
+					} catch (error) {
 					console.error('Error fetching favorites:', error.message);
 					console.error('Error details:', error.message);
 				}
@@ -345,7 +348,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const actions = getActions()
 				try {
 					const token = localStorage.getItem('jwt-token');
-					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book/${bookId}", {
+					const response = await fetch(`https://sturdy-space-memory-jxjv46qrgj5hq4pp-3000.app.github.dev/api/book/${bookId}`, {
 						method: 'DELETE',
 						headers: {
 							'Content-Type': 'application/json',
@@ -359,7 +362,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const result = await response.json();
 					if (result && result.msg === "ok") {
-						console.log("Book with ID ${bookId} deleted successfully");
+						console.log("Book ${bookId} deleted successfully");
 						actions.fetchBook();
 					} else{
 						console.error(result.message || "Error deleting book");
@@ -368,56 +371,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error deleting book:", error.message);
 				}
 			},
-			handle_delete_modal: () => {
-				const actions = getActions()
+			// handle_delete_modal: () => {
+			// 	const actions = getActions()
 
-				setStore({ show_modal: false })
-				setStore({ user_id: null })
-				setStore({ book_id: null })
-				// setStore({ favorites_id: null })
+			// 	setStore({ show_modal: false })
+			// 	setStore({ user_id: null })
+			// 	setStore({ book_id: null })
+			// 	// setStore({ favorites_id: null })
 
-				actions.clear_store()
+			// 	actions.clear_store()
 
-			},
+			// },
 
-			handleSubmit: async (e, data) => {
-				e.preventDefault();
-				const response = await fetch(process.env.BACKEND_URL + '/send_email', {
-					method: 'POST',
-					body: JSON.stringify(data),
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-				// const result = await response.json()
+			// handleSubmit: async (e, data) => {
+			// 	e.preventDefault();
+			// 	const response = await fetch(process.env.BACKEND_URL + '/send_email', {
+			// 		method: 'POST',
+			// 		body: JSON.stringify(data),
+			// 		headers: {
+			// 			"Content-Type": "application/json"
+			// 		}
+			// 	})
+			// 	// const result = await response.json()
 
-				if (response.ok) {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'success',
-						title: 'Success',
-						text: `Message sent succesdfully`,
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-				} else {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'error',
-						title: 'Opppsss',
-						text: "At this moment we can't send your message",
-						showConfirmButton: false,
-						color: '#FFFFFF',
-						background: '#41206C',
-						timer: 3000
-					})
-				}
-			},
-			handle_change: (e) => {
-				setStore({ [e.target.name]: e.target.value })
-			},
+			// 	if (response.ok) {
+			// 		Swal.fire({
+			// 			position: 'top-end',
+			// 			icon: 'success',
+			// 			title: 'Success',
+			// 			text: `Message sent succesdfully`,
+			// 			showConfirmButton: false,
+			// 			color: '#FFFFFF',
+			// 			background: '#41206C',
+			// 			timer: 3000
+			// 		})
+			// 	} else {
+			// 		Swal.fire({
+			// 			position: 'top-end',
+			// 			icon: 'error',
+			// 			title: 'Opppsss',
+			// 			text: "At this moment we can't send your message",
+			// 			showConfirmButton: false,
+			// 			color: '#FFFFFF',
+			// 			background: '#41206C',
+			// 			timer: 3000
+			// 		})
+			// 	}
+			// },
+			// handle_change: (e) => {
+			// 	setStore({ [e.target.name]: e.target.value })
+			// },
 		}
 	};
 };
