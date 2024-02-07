@@ -25,8 +25,8 @@ def addlogin():
     if user_data is None:
         raise APIException("The username is incorrect", status_code=404)
 
-    # if current_app.bcrypt.check_password_hash(user_data.password, request_body['password']) is False:
-    #     raise APIException('The password is incorrect', 401)
+    if current_app.bcrypt.check_password_hash(user_data.password, request_body['password']) is False:
+        raise APIException('The password is incorrect', 401)
 
     access_token = create_access_token(identity=request_body['username'])
 
@@ -167,16 +167,10 @@ def addBook():
     
     request_body = request.get_json(force=True, silent=True)
     
-    book_exist = Book.query.filter_by(
-        name=request_body['name'], 
-        author=request_body['author'], 
-        
-    )
-    if book_exist:
-        raise APIException("The book already exist", status_code=400)
-
     book = Book(
+        name=request_body['name'],
         description=request_body['description'],
+        year=request_body['year'],
         author=request_body['author'],
     )
 
@@ -211,6 +205,10 @@ def deleteBook(book_id):
     }
 
     return jsonify(response_body), 200
+
+@api.route('/test', methods=['GET'])
+def test():
+    return jsonify({"mensaje":"todo funciona bien"}), 200
 
 # <----------------- Favorites ----------------------->
 

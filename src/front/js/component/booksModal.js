@@ -39,7 +39,7 @@ export const BooksModal = (...props) => {
                                 type="text"
                                 className="form-control formModalBooks"
                                 id="firstName"
-                                name="first_name"
+                                name="name"
                                 onChange={actions.handle_change}
                                 defaultValue={!!store.book_id ? store.book_id.name : ""}
                             />
@@ -49,7 +49,7 @@ export const BooksModal = (...props) => {
                                     type="text"
                                     className="form-control formModalBooks"
                                     id="lastName"
-                                    name="last_name"
+                                    name="description"
                                     onChange={actions.handle_change}
                                     defaultValue={!!store.book_id ? store.book_id.description : ""}
                                 />
@@ -61,17 +61,29 @@ export const BooksModal = (...props) => {
                                 type="text"
                                 className="form-control formModalBooks"
                                 id="lastName"
-                                name="last_name"
+                                name="author"
                                 onChange={actions.handle_change}
                                 defaultValue={!!store.book_id ? store.book_id.author : ""}
                             />
                         </div>
+                        <div className="form-group mb-2">
+                            <label htmlFor="year" className="modal-label-input">Y34R</label>
+                            <input
+                                type="text"
+                                className="form-control formModalBooks"
+                                id="year"
+                                name="year"
+                                onChange={actions.handle_change}
+                                defaultValue={!!store.book_id ? store.book_id.year : ""}
+                            />
+                        </div>
                     </div>
                     <div className="modal-footer d-flex justify-content-center aligh-items-center">
-                        <button type="submit" className="btn btn-login fw-bold text-center">
+                        <button type="submit" className="btn btn-login fw-bold text-center" onClick={() => actions.addBookById(store.book_id)}>
                             Save
                         </button>
-                        <button type="reset" className="btn btn-login fw-bold text-center">Clear
+                        <button type="reset" className="btn btn-login fw-bold text-center" onClick={() => actions.handle_delete_modal()}>
+                            Clear
                         </button>
                     </div>
                 </div>

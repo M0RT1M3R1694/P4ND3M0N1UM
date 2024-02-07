@@ -13,14 +13,14 @@ export const Favorites_sAdmiButtons = () => {
                     <div className="col-md-7 col-sm-7 my-3">
                         <div className="card favorites_sCard">
                             <div className="card-body pb-0 pt-0">
-                                <div className="input-search d-flex align-items-center">
+                                {/* <div className="input-search d-flex align-items-center">
                                     <input type="text" id="inputFavoritesSearch" className="form-control formControlFavoritesSearchButton"
                                         autoComplete="off" aria-describedby="passwordHelpInline" placeholder="Search Favorites"
                                         onKeyUp={(e) => {
                                             actions.search_favorites(e.target.value)
                                         }} />                          
                                         <i className="fa-solid fa-magnifying-glass me-2"></i>                     
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

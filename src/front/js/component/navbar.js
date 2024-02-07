@@ -49,6 +49,7 @@ export const Navbar = () => {
 							</Link>
 						</li>
 					</ul>
+					{/* <button className="btn btn-login" onClick={() => actions.test()}><i className="fa-regular fa-user me-2"></i>Test</button> */}
 				</div>
 			</div>
 		</nav>
