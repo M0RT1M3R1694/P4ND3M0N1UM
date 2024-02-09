@@ -53,7 +53,9 @@ const Login = () => {
                 <div className='text-center'>
 
                     <button className='btnLogin btn'>L0G1N</button>
-
+                    <Link to= "/signup">
+                    <button className='btnLogin btn'>S1GN UP</button>
+                    </Link>  
                 </div>
             </form>
 

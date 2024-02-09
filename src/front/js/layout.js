@@ -8,6 +8,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Books } from "./pages/books";
 import Login from "./pages/login";
+import Signup from "./pages/signup";
 import ForgotPass from "./pages/forgotPass";
 import OurCategories from "./pages/ourCategories";
 import ChangePass from "./pages/changePass";
@@ -36,6 +37,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
+                        <Route element={<Signup />} path="/signup" />
                         <Route element={<Favorites_sAdmi />} path="/favorites_sAdmi" />
                         <Route element={<Books />} path="/books" />
                         <Route element={<Users />} path="/users" />

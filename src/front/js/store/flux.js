@@ -7,12 +7,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			username: null,
 			first_name: null,
 			last_name: null,
+			email: null,
 			password: null,
+			role: null,
 
-			name: "",  
-            description: "",
-            year: "",
-            author: "",
+			name: "",
+			description: "",
+			year: "",
+			author: "",
 
 			favorites: [],
 			favorites_search: [],
@@ -178,18 +180,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addBookById: async () => {
 				const store = getStore();
 				const actions = getActions();
-			
+
 				try {
 					const token = localStorage.getItem('jwt-token');
 					const bookData = {
-						name: store.name || "", 
+						name: store.name || "",
 						description: store.description || "",
 						year: store.year || "",
 						author: store.author || "",
 					};
-			
+
 					const url = store.book_id ? `https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book/${store.book_id}` : 'https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book';
-			
+
 					const response = await fetch(url, {
 						method: store.book_id ? 'PUT' : 'POST',
 						headers: {
@@ -198,11 +200,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						body: JSON.stringify(bookData)
 					});
-			
+
 					if (!response.ok) {
 						throw new Error('Network response was not ok');
 					}
-			
+
 					const result = await response.json();
 					if (result.msg === "ok") {
 						actions.fetchBook(); // Actualiza la lista de libros después de agregar o actualizar
@@ -235,7 +237,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ fetchBook: false });
 				}
 			},
-			
+
 			fetchUsers: async () => {
 				try {
 					const response = await fetch(`https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/user`, {
@@ -381,14 +383,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error deleting book:", error.message);
 				}
 			},
-            handle_show_modal: (userId, bookId) => {
-                setStore({ show_modal: true });
-                setStore({ user_id: userId || null });
-                setStore({ book_id: bookId || null });
-                // Puedes agregar más setStore según tus necesidades
-                // Además, puedes realizar otras acciones si es necesario
-                // actions.otra_accion();
-            },
+			signUp: async (first_name, last_name, email, role, username, password) => {
+				console.log(first_name, last_name, email, role, username, password)
+				try {
+					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/signup", {
+						method: "POST",
+						body: JSON.stringify({
+							username: username,
+							first_name: first_name,
+							last_name: last_name,
+							email: email,
+							password: password,
+							role: role
+						}),
+						headers: {
+							"Content-type": "application/json"
+						}
+					})
+					// if (response.status==200){
+					const data = await response.json()
+					console.log(data)
+					// 	localStorage.setItem("token", data.access_token)
+					// }
+				} catch (error) {
+					console.log(error)
+				}
+			},
+			handle_show_modal: (userId, bookId) => {
+				setStore({ show_modal: true });
+				setStore({ user_id: userId || null });
+				setStore({ book_id: bookId || null });
+				// Puedes agregar más setStore según tus necesidades
+				// Además, puedes realizar otras acciones si es necesario
+				// actions.otra_accion();
+			},
 			handle_delete_modal: () => {
 				const actions = getActions()
 

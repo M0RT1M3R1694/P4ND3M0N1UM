@@ -6,6 +6,7 @@ from api.models import db, User,Book,Favorites,Categories
 from api.utils import generate_sitemap, APIException
 from datetime import datetime
 from flask_jwt_extended import create_access_token, get_jwt_identity,jwt_required
+import json
 
 api = Blueprint('api', __name__)
 
@@ -37,6 +38,22 @@ def addlogin():
     }
 
     return jsonify(response_body), 200
+# <----------------- sign up ----------------------->
+@api.route("/signup", methods=["POST"])
+def create_one_user():
+    body = json.loads(request.data)
+    new_user = User(
+        username = body["username"],
+        first_name = body["first_name"],
+        last_name = body["last_name"],
+        email = body["email"],
+        password = body["password"],
+        role = body["role"],
+    )
+    db.session.add(new_user)
+    db.session.commit()
+    
+    return jsonify({"msg": "user created succesfull"}), 200
 
 # <----------------- logout ----------------------->
 @api.route('/islogout', methods=['POST'])
