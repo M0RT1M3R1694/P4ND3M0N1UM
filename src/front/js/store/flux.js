@@ -28,6 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			book: [],
 			book_search: [],
 			book_id: null,
+			fantasyBooks: [],
 
 			ourCategories: [],
 			ourCategories_search: [],
@@ -69,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					}
 					console.log("el usuario muestra", user.username, " la contraseña es", user.password)
-					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/login", {
+					const response = await fetch(process.env.BACKEND_URL + 'api/login', {
 						method: 'POST',
 						body: JSON.stringify(user),
 						headers: {
@@ -120,7 +121,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isAuth: async () => {
 				const token = localStorage.getItem('jwt-token')
 
-				const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/isAuth", {
+				const response = await fetch(process.env.BACKEND_URL + 'api/isAuth', {
 					method: 'GET',
 					headers: {
 						"Content-Type": "application/json",
@@ -154,7 +155,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchBook: async () => {
 				try {
 					const token = localStorage.getItem('jwt-token');
-					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/book", {
+					const response = await fetch(process.env.BACKEND_URL + 'api/book', {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -240,7 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			fetchUsers: async () => {
 				try {
-					const response = await fetch(`https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/user`, {
+					const response = await fetch(process.env.BACKEND_URL + 'api/user', {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -277,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchFavorites: async () => {
 				try {
 					const token = localStorage.getItem('jwt-token');
-					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/favorites", {
+					const response = await fetch(process.env.BACKEND_URL + 'api/favorites', {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -383,31 +384,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error deleting book:", error.message);
 				}
 			},
-			signUp: async (first_name, last_name, email, role, username, password) => {
-				console.log(first_name, last_name, email, role, username, password)
+			signUp: async () => {
+				const store = getStore();
+				const actions = getActions();
+
 				try {
-					const response = await fetch("https://sturdy-space-memory-jxjv46qrgj5hq4pp-3001.app.github.dev/api/signup", {
+					const userCredentials = {
+						username: store.username || "",
+						first_name: store.first_name || "",
+						last_name: store.last_name || "",
+						email: store.email || "",
+						password: store.password || "",
+						role: store.role || ""
+					};
+
+					const response = await fetch(process.env.BACKEND_URL + 'api/signup', {
 						method: "POST",
-						body: JSON.stringify({
-							username: username,
-							first_name: first_name,
-							last_name: last_name,
-							email: email,
-							password: password,
-							role: role
-						}),
+						body: JSON.stringify(userCredentials),
 						headers: {
 							"Content-type": "application/json"
 						}
-					})
-					// if (response.status==200){
-					const data = await response.json()
-					console.log(data)
-					// 	localStorage.setItem("token", data.access_token)
-					// }
+					});
+
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					if (response.status === 200) {
+						const data = await response.json();
+						console.log(data);
+						return true;
+					}
+
+
 				} catch (error) {
-					console.log(error)
+					console.error("Error signing up:", error.message);
+					// Puedes manejar el error según tu necesidad aquí
 				}
+			},
+			loadFantasyBooks() {
+				var apiUrl = 'https://www.googleapis.com/books/v1/volumes?q=subject:fantasy';
+
+				fetch(apiUrl)
+					.then(response => response.json())
+					.then(data => {
+						this.fantasyBooks = data.items;
+						console.log(fantasyBooks)
+					})
+					.catch(error => console.error('Error:', error));
 			},
 			handle_show_modal: (userId, bookId) => {
 				setStore({ show_modal: true });

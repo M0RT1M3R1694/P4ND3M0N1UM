@@ -5,6 +5,9 @@ import "../../styles/home.css";
 export const Home = () => {
 	const { store, actions } = useContext(Context)
 
+	useEffect(() => { actions.loadFantasyBooks() }, [])
+	console.log(store.fantasyBooks)
+
 	return (
 		<div>
 			<header className="header-Home">
