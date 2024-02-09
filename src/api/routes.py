@@ -26,8 +26,6 @@ def addlogin():
     if user_data is None:
         raise APIException("The username is incorrect", status_code=404)
 
-    if current_app.bcrypt.check_password_hash(user_data.password, request_body['password']) is False:
-        raise APIException('The password is incorrect', 401)
 
     access_token = create_access_token(identity=request_body['username'])
 
