@@ -5,9 +5,11 @@ import "../../styles/home.css";
 export const Home = () => {
 	const { store, actions } = useContext(Context)
 
-	useEffect(() => { actions.loadFantasyBooks() }, [])
-	console.log(store.fantasyBooks)
+	useEffect(() => {
+		actions.loadFantasyBooks()
 
+	}, []);
+	console.log(store.fantasyBooks);
 	return (
 		<div>
 			<header className="header-Home">
@@ -26,7 +28,80 @@ export const Home = () => {
 
 				<section className="portfolio">
 					<div className="container container-portfolio">
-						<h3 className="title-home">B00KS</h3>
+
+						<h3 className="title-home">F4NT4SY B00KS</h3>
+
+						{/* Mapeo de libros fantasy */}
+						<div className="row">
+							{store.fantasyBooks.map((book, index) => (
+								<div className="col-md-4" key={index}>
+									<div className="card text-white bg-dark" style={{ width: "18rem" }}>
+										<img src={book.volumeInfo.imageLinks.thumbnail} className="card-img-top square-image" alt={book.volumeInfo.title} />
+										<div className="card-body">
+											<h5 className="card-title">{book.volumeInfo.title}</h5>
+											<p className="card-text">Author:{book.volumeInfo.authors[0]}</p>
+											<p className="card-text">Published Date: {book.volumeInfo.publishedDate}</p>
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+
+						<h3 className="title-home">THR1LL3R B00KS</h3>
+
+						{/* Mapeo de libros thriller */}
+						<div className="row">
+							{store.thrillerBooks.map((book, index) => (
+								<div className="col-md-4" key={index}>
+									<div className="card text-white bg-dark" style={{ width: "18rem" }}>
+										<img src={book.volumeInfo.imageLinks.thumbnail} className="card-img-top square-image" alt={book.volumeInfo.title} />
+										<div className="card-body">
+											<h5 className="card-title">{book.volumeInfo.title}</h5>
+											<p className="card-text">Author:{book.volumeInfo.authors[0]}</p>
+											<p className="card-text">Published Date: {book.volumeInfo.publishedDate}</p>
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+
+						<h3 className="title-home">H0RR0R B00KS</h3>
+
+						{/* Mapeo de libros horror */}
+						<div className="row">
+							{store.horrorBooks.map((book, index) => (
+								<div className="col-md-4" key={index}>
+									<div className="card text-white bg-dark" style={{ width: "18rem" }}>
+										<img src={book.volumeInfo.imageLinks.thumbnail} className="card-img-top square-image" alt={book.volumeInfo.title} />
+										<div className="card-body">
+											<h5 className="card-title">{book.volumeInfo.title}</h5>
+											<p className="card-text">Author:{book.volumeInfo.authors[0]}</p>
+											<p className="card-text">Published Date: {book.volumeInfo.publishedDate}</p>
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+
+						<h3 className="title-home">R0M4NC3 B00KS</h3>
+
+						{/* Mapeo de libros horror */}
+						<div className="row">
+							{store.romanceBooks.map((book, index) => (
+								<div className="col-md-4" key={index}>
+									<div className="card text-white bg-dark" style={{ width: "18rem" }}>
+										<img src={book.volumeInfo.imageLinks.thumbnail} className="card-img-top square-image" alt={book.volumeInfo.title} />
+										<div className="card-body">
+											<h5 className="card-title">{book.volumeInfo.title}</h5>
+											<p className="card-text">Author:{book.volumeInfo.authors[0]}</p>
+											<p className="card-text">Published Date: {book.volumeInfo.publishedDate}</p>
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+						
+						{/* <h3 className="title-home">B00KS</h3>
 						<div className="galeria-port">
 							<div className="imagen-port">
 								<img src="https://s26162.pcdn.co/wp-content/uploads/2017/10/the-ritual.jpg" alt="" />
@@ -40,11 +115,11 @@ export const Home = () => {
 							<div className="imagen-port">
 								<img src="https://wordery.com/jackets/94b5c3e4/book-of-shadows-anastasia-greywolf-9781577152422.jpg?width=266" alt="" />
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</section>
 
-				<section className="container-ourClients">
+				{/* <section className="container-ourClients">
 					<h3 className="title-home">C4T3G0R13S</h3>
 					<div className="row">
 						<div className="col-md-4">
@@ -85,7 +160,7 @@ export const Home = () => {
 
 						</div>
 					</div>
-				</section>
+				</section> */}
 
 				<section className="team-home">
 					<div className="container team-home">

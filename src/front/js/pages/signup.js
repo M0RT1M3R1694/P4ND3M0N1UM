@@ -19,7 +19,7 @@ const Signup = () => {
 
             <form className="form-login mt-3" onSubmit={e => {
                 e.preventDefault()
-                const res = actions.signUp(first_name, last_name, email, role, username, password)
+                const res = actions.signUp()
                 if (res) {
                     navigate("/login")
                 }

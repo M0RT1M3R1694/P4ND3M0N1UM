@@ -29,6 +29,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			book_search: [],
 			book_id: null,
 			fantasyBooks: [],
+			romanceBooks: [],
+			horrorBooks: [],
+			thrillerBooks: [],
 
 			ourCategories: [],
 			ourCategories_search: [],
@@ -319,7 +322,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					favorites.id_book = store.book_id
 				}
 
-				const response = await fetch(process.env.BACKEND_URL + "/favorites", {
+				const response = await fetch(process.env.BACKEND_URL + "api/favorites", {
 					method: 'POST',
 					body: JSON.stringify(favorites),
 					headers: {
@@ -421,16 +424,49 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// Puedes manejar el error según tu necesidad aquí
 				}
 			},
-			loadFantasyBooks() {
-				var apiUrl = 'https://www.googleapis.com/books/v1/volumes?q=subject:fantasy';
+			loadFantasyBooks: async () => {
+				try { 
+					const apiUrl = 'https://www.googleapis.com/books/v1/volumes?q=subject:fantasy';
+					const response = await fetch(apiUrl);
+					const data = await response.json();
 
-				fetch(apiUrl)
-					.then(response => response.json())
-					.then(data => {
-						this.fantasyBooks = data.items;
-						console.log(fantasyBooks)
-					})
-					.catch(error => console.error('Error:', error));
+					setStore({ fantasyBooks: data.items })
+				} catch(error) {
+					console.error('Error:', error);
+				}
+			},
+			loadRomanceBooks: async () => {
+				try { 
+					const apiUrl = 'https://www.googleapis.com/books/v1/volumes?q=subject:romance';
+					const response = await fetch(apiUrl);
+					const data = await response.json();
+
+					setStore({ romanceBooks: data.items })
+				} catch(error) {
+					console.error('Error:', error);
+				}
+			},
+			loadHorrorBooks: async () => {
+				try { 
+					const apiUrl = 'https://www.googleapis.com/books/v1/volumes?q=subject:horror';
+					const response = await fetch(apiUrl);
+					const data = await response.json();
+
+					setStore({ horrorBooks: data.items })
+				} catch(error) {
+					console.error('Error:', error);
+				}
+			},
+			loadThrillerBooks: async () => {
+				try { 
+					const apiUrl = 'https://www.googleapis.com/books/v1/volumes?q=subject:thriller';
+					const response = await fetch(apiUrl);
+					const data = await response.json();
+
+					setStore({ thrillerBooks: data.items })
+				} catch(error) {
+					console.error('Error:', error);
+				}
 			},
 			handle_show_modal: (userId, bookId) => {
 				setStore({ show_modal: true });
