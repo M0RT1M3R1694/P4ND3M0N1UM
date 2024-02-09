@@ -13,8 +13,8 @@ export const Navbar = () => {
 					<img src={logo} alt="Logo" className="nav-img d-inline-block align-text-center me-2" />
 					<span className="navbar-brand mb-0 h1 fs-3">P4ND3M0N1UM</span>
 				</Link>
-				<button className="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-					<i className="fa-solid fa-bars"></i>
+				<button className="navbar-toggler btn-light " type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+					<span className="navbar-toggler-icon">X</span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarTogglerDemo02">
 					<ul className="navbar-nav ms-auto mb-lg-0">
@@ -28,11 +28,6 @@ export const Navbar = () => {
 								<span className="nav-span">B00KS</span>
 							</Link>
 						</li>
-						{/* <li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.ourCategories}>
-							<Link to="/ourCategories" className="nav-link text-decoration-none">
-								<span className="nav-span">C4T3G0R13S</span>
-							</Link>
-						</li> */}
 						<li className="nav-link nav-item nav-menu ms-3" hidden={store.buttons_admin_tech.favorites_sadmi}>
 							<Link to="/favorites_sadmi" className="nav-link text-decoration-none">
 								<span className="nav-span">F4V0R1T3S</span>
@@ -49,7 +44,6 @@ export const Navbar = () => {
 							</Link>
 						</li>
 					</ul>
-					{/* <button className="btn btn-login" onClick={() => actions.test()}><i className="fa-regular fa-user me-2"></i>Test</button> */}
 				</div>
 			</div>
 		</nav>
